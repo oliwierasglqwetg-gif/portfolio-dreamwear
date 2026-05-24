@@ -5015,7 +5015,9 @@
     const videoLoader = document.getElementById("videoLoader");
 
     function isLocalVideo(src){
-      return /\.(mp4|webm|ogg)$/i.test(src || "");
+      if(!src) return false;
+      const cleanSrc = String(src).split("?")[0].toLowerCase();
+      return /\.(mp4|webm|ogg)$/i.test(cleanSrc);
     }
 
     function showLoader(on){
