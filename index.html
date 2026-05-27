@@ -3914,6 +3914,86 @@
       background: #000;
     }
 
+
+    .vimeoPlayLayer{
+      position:absolute;
+      inset:0;
+      z-index: 6;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      background:
+        radial-gradient(260px 260px at 50% 50%, rgba(0,0,0,.24), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.24));
+      border:0;
+      padding:0;
+      color: rgba(255,255,255,.96);
+      transition: opacity .18s ease, background .18s ease;
+    }
+
+    .vimeoPlayLayer::before{
+      content:"";
+      width: 68px;
+      height: 68px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 28%, rgba(255,255,255,.22), transparent 44%),
+        rgba(0,0,0,.52);
+      border: 1px solid rgba(255,255,255,.24);
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.48),
+        0 0 34px rgba(52,211,153,.13);
+      backdrop-filter: blur(10px);
+      transition: transform .18s ease, opacity .18s ease;
+    }
+
+    .vimeoPlayLayer::after{
+      content:"";
+      position:absolute;
+      left: calc(50% + 3px);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+      border-top: 14px solid transparent;
+      border-bottom: 14px solid transparent;
+      border-left: 21px solid rgba(255,255,255,.96);
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.35));
+      transition: opacity .18s ease;
+    }
+
+    .vimeoPlayLayer:hover::before{
+      transform: scale(1.06);
+    }
+
+    .thumb.vimeoPlaying .vimeoPlayLayer,
+    .modalMedia.vimeoPlaying .vimeoPlayLayer{
+      opacity: 0;
+      pointer-events: auto;
+      background: transparent;
+    }
+
+    .thumb.vimeoPlaying:hover .vimeoPlayLayer,
+    .modalMedia.vimeoPlaying:hover .vimeoPlayLayer{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .thumb.vimeoPlaying:hover .vimeoPlayLayer::before,
+    .thumb.vimeoPlaying:hover .vimeoPlayLayer::after,
+    .modalMedia.vimeoPlaying:hover .vimeoPlayLayer::before,
+    .modalMedia.vimeoPlaying:hover .vimeoPlayLayer::after{
+      opacity: .72;
+    }
+
+    #portfolio .vimeoThumb{
+      pointer-events: none;
+    }
+
+    .modalMedia{
+      position: relative;
+    }
+
     #portfolio .meta{
       padding: 16px 18px 18px;
     }
@@ -4348,9 +4428,9 @@
           </div>
 
           <div class="projects">
-            <article class="project reveal" data-title="Rolka #1" data-video="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+            <article class="project reveal" data-title="Rolka #1" data-video="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
               <div class="thumb" aria-label="Rolka #1">
-                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FAJNA1"></iframe>
+                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FAJNA1"></iframe>
               </div>
               <div class="meta">
                 <h4>Rolka #1</h4>
@@ -4361,9 +4441,9 @@
               </div>
             </article>
 
-            <article class="project reveal" data-title="Rolka #2" data-video="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+            <article class="project reveal" data-title="Rolka #2" data-video="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
               <div class="thumb" aria-label="Rolka #2">
-                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FAJNA2"></iframe>
+                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FAJNA2"></iframe>
               </div>
               <div class="meta">
                 <h4>Rolka #2</h4>
@@ -4374,9 +4454,9 @@
               </div>
             </article>
 
-            <article class="project reveal" data-title="Rolka #3" data-video="https://player.vimeo.com/video/1195982932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+            <article class="project reveal" data-title="Rolka #3" data-video="https://player.vimeo.com/video/1195982932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
               <div class="thumb" aria-label="Rolka #3">
-                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OWCA"></iframe>
+                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OWCA"></iframe>
               </div>
               <div class="meta">
                 <h4>Rolka #3</h4>
@@ -4396,9 +4476,9 @@
           <div class="moreWrap" id="moreWrap">
             <div class="moreGrid">
 
-              <article class="project reveal" data-title="Rolka #4" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="Rolka #4" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Rolka #4">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_4"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_4"></iframe>
                 </div>
                 <div class="meta">
                   <h4>Rolka #4</h4>
@@ -4409,9 +4489,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #1" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="OD #1" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #1">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_1"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_1"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #1</h4>
@@ -4422,9 +4502,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #2" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="OD #2" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #2">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_2"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_2"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #2</h4>
@@ -4435,9 +4515,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #3" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="OD #3" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #3">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_3"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_3"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #3</h4>
@@ -4448,9 +4528,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #4" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="OD #4" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #4">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_4"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_4"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #4</h4>
@@ -4462,9 +4542,9 @@
               </article>
 
             
-              <article class="project reveal" data-title="Video #1" data-video="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="Video #1" data-video="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Video #1">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_1"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_1"></iframe>
                 </div>
                 <div class="meta">
                   <h4>Video #1</h4>
@@ -4475,9 +4555,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="Video #2" data-video="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="Video #2" data-video="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Video #2">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_2"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_2"></iframe>
                 </div>
                 <div class="meta">
                   <h4>Video #2</h4>
@@ -4488,9 +4568,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="Video #3" data-video="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <article class="project reveal" data-title="Video #3" data-video="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Video #3">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_3"></iframe>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_3"></iframe>
                 </div>
                 <div class="meta">
                   <h4>Video #3</h4>
@@ -4585,7 +4665,7 @@
                 <div class="pricePoint"><i>✓</i><span><b>Czyste cięcia</b> bez przeładowania efektami</span></div>
               </div>
 
-              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu Clean" data-video="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu Clean" data-video="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <i>▶</i>
                 <div>Podgląd stylu<br><span>zobacz przykład Clean</span></div>
               </button>
@@ -4638,7 +4718,7 @@
                 <div class="pricePoint"><i>✓</i><span><b>Animowane elementy</b> podkreślające najważniejsze fragmenty</span></div>
               </div>
 
-              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu OWLLX" data-video="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu OWLLX" data-video="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <i>▶</i>
                 <div>Podgląd stylu<br><span>zobacz przykład OWLLX</span></div>
               </button>
@@ -5304,8 +5384,115 @@
       });
     });
 
-    const thumbVideos = Array.from(document.querySelectorAll(".thumbVideo"));
+    const thumbVideos = Array.from(document.querySelectorAll("video.thumbVideo"));
+    const vimeoPlayers = new Map();
+    let modalVimeoPlayer = null;
 
+    function normalizeVimeoUrl(src){
+      if(!src || !String(src).includes("player.vimeo.com/video/")) return src;
+
+      const raw = String(src).replace(/&amp;/g, "&");
+      const parts = raw.split("?");
+      const base = parts[0];
+      const params = new URLSearchParams(parts[1] || "");
+
+      params.set("badge", "0");
+      params.set("autopause", "0");
+      params.set("title", "0");
+      params.set("byline", "0");
+      params.set("portrait", "0");
+      params.set("loop", "1");
+      params.set("dnt", "1");
+      params.set("playsinline", "1");
+      params.set("controls", "0");
+
+      if(!params.has("player_id")) params.set("player_id", "0");
+      if(!params.has("app_id")) params.set("app_id", "58479");
+
+      return `${base}?${params.toString()}`;
+    }
+
+    function setVimeoUrls(){
+      document.querySelectorAll('iframe[src*="player.vimeo.com/video/"]').forEach(frame => {
+        const fixed = normalizeVimeoUrl(frame.getAttribute("src"));
+        if(fixed) frame.setAttribute("src", fixed);
+        frame.setAttribute("title", "Podgląd wideo");
+        frame.setAttribute("loading", "lazy");
+      });
+
+      document.querySelectorAll("[data-video]").forEach(el => {
+        const fixed = normalizeVimeoUrl(el.getAttribute("data-video"));
+        if(fixed) el.setAttribute("data-video", fixed);
+      });
+    }
+
+    function getVimeoPlayer(frame){
+      if(!frame || !window.Vimeo || !window.Vimeo.Player) return null;
+
+      if(vimeoPlayers.has(frame)) return vimeoPlayers.get(frame);
+
+      const player = new Vimeo.Player(frame);
+      vimeoPlayers.set(frame, player);
+      return player;
+    }
+
+    function makePlayLayer(label){
+      const layer = document.createElement("button");
+      layer.className = "vimeoPlayLayer";
+      layer.type = "button";
+      layer.setAttribute("aria-label", label || "Odtwórz wideo");
+      return layer;
+    }
+
+    function attachInlineVimeoPlayers(){
+      if(!window.Vimeo || !window.Vimeo.Player) return;
+
+      document.querySelectorAll("#portfolio .thumb").forEach(thumb => {
+        const frame = thumb.querySelector('iframe[src*="player.vimeo.com/video/"]');
+        if(!frame || thumb.querySelector(".vimeoPlayLayer")) return;
+
+        const layer = makePlayLayer("Odtwórz lub zatrzymaj wideo");
+        thumb.appendChild(layer);
+
+        const player = getVimeoPlayer(frame);
+        if(!player) return;
+
+        player.setLoop(true).catch(()=>{});
+
+        player.on("play", () => {
+          thumb.classList.add("vimeoPlaying");
+        });
+
+        player.on("pause", () => {
+          thumb.classList.remove("vimeoPlaying");
+        });
+
+        player.on("ended", () => {
+          thumb.classList.remove("vimeoPlaying");
+          player.setCurrentTime(0).catch(()=>{});
+        });
+
+        layer.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          player.getPaused().then(paused => {
+            if(paused){
+              player.play().catch(()=>{});
+            } else {
+              player.pause().catch(()=>{});
+            }
+          }).catch(() => {
+            player.play().catch(()=>{});
+          });
+        });
+      });
+    }
+
+    function initCustomVimeoPlayers(){
+      setVimeoUrls();
+      attachInlineVimeoPlayers();
+    }
 
     thumbVideos.forEach(v => {
       v.addEventListener("error", () => {
@@ -5318,7 +5505,6 @@
       });
     });
 
-
     function playThumbs(){
       thumbVideos.forEach(v => v.play().catch(()=>{}));
     }
@@ -5327,9 +5513,15 @@
       thumbVideos.forEach(v => {
         try{ v.pause(); }catch(e){}
       });
+
+      vimeoPlayers.forEach(player => {
+        player.pause().catch(()=>{});
+      });
+
+      document.querySelectorAll(".thumb.vimeoPlaying").forEach(el => el.classList.remove("vimeoPlaying"));
     }
 
-    setTimeout(playThumbs, 250);
+    setVimeoUrls();
 
     const modal = document.getElementById("modal");
     const modalBg = document.getElementById("modalBg");
@@ -5338,6 +5530,7 @@
     const modalVideo = document.getElementById("modalVideo");
     const modalTitle = document.getElementById("modalTitle");
     const videoLoader = document.getElementById("videoLoader");
+    const modalMedia = document.querySelector("#modal .modalMedia");
 
     function isLocalVideo(src){
       if(!src) return false;
@@ -5351,6 +5544,17 @@
     }
 
     function resetVideoModal(){
+      if(modalVimeoPlayer){
+        modalVimeoPlayer.unload().catch(()=>{});
+        modalVimeoPlayer = null;
+      }
+
+      if(modalMedia){
+        modalMedia.classList.remove("vimeoPlaying");
+        const oldLayer = modalMedia.querySelector(".vimeoPlayLayer");
+        if(oldLayer) oldLayer.remove();
+      }
+
       modalFrame.style.display = "none";
       modalFrame.src = "about:blank";
 
@@ -5362,6 +5566,49 @@
       showLoader(false);
     }
 
+    function setupModalVimeo(){
+      if(!modalMedia || !window.Vimeo || !window.Vimeo.Player) return;
+
+      const layer = makePlayLayer("Odtwórz lub zatrzymaj wideo");
+      modalMedia.appendChild(layer);
+
+      modalVimeoPlayer = new Vimeo.Player(modalFrame);
+      modalVimeoPlayer.setLoop(true).catch(()=>{});
+
+      modalVimeoPlayer.on("loaded", () => {
+        showLoader(false);
+      });
+
+      modalVimeoPlayer.on("play", () => {
+        modalMedia.classList.add("vimeoPlaying");
+        showLoader(false);
+      });
+
+      modalVimeoPlayer.on("pause", () => {
+        modalMedia.classList.remove("vimeoPlaying");
+      });
+
+      modalVimeoPlayer.on("ended", () => {
+        modalMedia.classList.remove("vimeoPlaying");
+        modalVimeoPlayer.setCurrentTime(0).catch(()=>{});
+      });
+
+      layer.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        modalVimeoPlayer.getPaused().then(paused => {
+          if(paused){
+            modalVimeoPlayer.play().catch(()=>{});
+          } else {
+            modalVimeoPlayer.pause().catch(()=>{});
+          }
+        }).catch(() => {
+          modalVimeoPlayer.play().catch(()=>{});
+        });
+      });
+    }
+
     function openVideoModal(title, src){
       modalTitle.textContent = title || "Podgląd";
       resetVideoModal();
@@ -5369,6 +5616,7 @@
 
       if(isLocalVideo(src)){
         modalVideo.style.display = "block";
+        modalVideo.loop = true;
         showLoader(true);
 
         modalVideo.setAttribute("controlsList", "nodownload noremoteplayback noplaybackrate");
@@ -5394,11 +5642,16 @@
         modalVideo.addEventListener("stalled", () => showLoader(true));
       } else {
         modalFrame.style.display = "block";
-        modalFrame.src = src || "about:blank";
+        showLoader(true);
+        modalFrame.src = normalizeVimeoUrl(src) || "about:blank";
       }
 
       modal.style.display = "block";
       modal.setAttribute("aria-hidden", "false");
+
+      if(!isLocalVideo(src)){
+        setTimeout(setupModalVimeo, 120);
+      }
     }
 
     function closeVideoModal(){
@@ -5417,7 +5670,7 @@
       const title = card.getAttribute("data-title");
 
       if(thumb && video){
-        thumb.addEventListener("click", () => openVideoModal(title, video));
+        thumb.addEventListener("dblclick", () => openVideoModal(title, video));
       }
     });
 
@@ -5429,6 +5682,8 @@
         openVideoModal(title, video);
       });
     });
+
+    window.addEventListener("load", initCustomVimeoPlayers);
 
     const moreBtn = document.getElementById("moreBtn");
     const moreWrap = document.getElementById("moreWrap");
