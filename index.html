@@ -3924,11 +3924,11 @@
       cursor:pointer;
       background:
         radial-gradient(260px 260px at 50% 50%, rgba(0,0,0,.24), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.24));
+        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.36));
       border:0;
       padding:0;
       color: rgba(255,255,255,.96);
-      transition: opacity .18s ease, background .18s ease;
+      transition: background .18s ease;
     }
 
     .vimeoPlayLayer::before{
@@ -3968,22 +3968,102 @@
 
     .thumb.vimeoPlaying .vimeoPlayLayer,
     .modalMedia.vimeoPlaying .vimeoPlayLayer{
-      opacity: 0;
-      pointer-events: auto;
       background: transparent;
     }
 
-    .thumb.vimeoPlaying:hover .vimeoPlayLayer,
-    .modalMedia.vimeoPlaying:hover .vimeoPlayLayer{
-      opacity: 1;
+    .thumb.vimeoPlaying .vimeoPlayLayer::before,
+    .thumb.vimeoPlaying .vimeoPlayLayer::after,
+    .modalMedia.vimeoPlaying .vimeoPlayLayer::before,
+    .modalMedia.vimeoPlaying .vimeoPlayLayer::after{
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .vimeoHud{
+      position:absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 8;
+      display:grid;
+      grid-template-columns: auto 1fr auto auto;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.42);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 14px 38px rgba(0,0,0,.34);
+      opacity: .92;
+      transition: opacity .18s ease, transform .18s ease;
       pointer-events: auto;
     }
 
-    .thumb.vimeoPlaying:hover .vimeoPlayLayer::before,
-    .thumb.vimeoPlaying:hover .vimeoPlayLayer::after,
-    .modalMedia.vimeoPlaying:hover .vimeoPlayLayer::before,
-    .modalMedia.vimeoPlaying:hover .vimeoPlayLayer::after{
-      opacity: .72;
+    .thumb.vimeoPlaying:not(:hover) .vimeoHud,
+    .modalMedia.vimeoPlaying:not(:hover) .vimeoHud{
+      opacity: .36;
+      transform: translateY(2px);
+    }
+
+    .vimeoTime{
+      min-width: 34px;
+      color: rgba(255,255,255,.82);
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 800;
+      text-align:center;
+      line-height:1;
+    }
+
+    .vimeoProgress{
+      width: 100%;
+      height: 4px;
+      accent-color: rgba(52,211,153,.95);
+      cursor:pointer;
+    }
+
+    .vimeoVol,
+    .vimeoQuality{
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.88);
+      font-size: 11px;
+      font-family: var(--font);
+      outline: none;
+    }
+
+    .vimeoVol{
+      width: 54px;
+      accent-color: rgba(251,191,36,.95);
+    }
+
+    .vimeoQuality{
+      max-width: 70px;
+      padding: 0 7px;
+      cursor:pointer;
+    }
+
+    .vimeoQuality option{
+      color: #111;
+      background: #fff;
+    }
+
+    @media (max-width: 560px){
+      .vimeoHud{
+        left: 9px;
+        right: 9px;
+        bottom: 9px;
+        grid-template-columns: auto 1fr auto;
+        gap: 6px;
+        padding: 7px 8px;
+      }
+
+      .vimeoVol{ display:none; }
+      .vimeoQuality{ max-width: 58px; font-size: 10px; padding: 0 5px; }
+      .vimeoTime{ min-width: 30px; font-size: 9px; }
     }
 
     #portfolio .vimeoThumb{
@@ -5440,8 +5520,124 @@
       const layer = document.createElement("button");
       layer.className = "vimeoPlayLayer";
       layer.type = "button";
-      layer.setAttribute("aria-label", label || "Odtwórz wideo");
+      layer.setAttribute("aria-label", label || "Odtwórz albo zatrzymaj wideo");
       return layer;
+    }
+
+    function formatVimeoTime(seconds){
+      const total = Math.max(0, Math.floor(Number(seconds) || 0));
+      const mins = Math.floor(total / 60);
+      const secs = String(total % 60).padStart(2, "0");
+      return `${mins}:${secs}`;
+    }
+
+    function makeVimeoHud(){
+      const hud = document.createElement("div");
+      hud.className = "vimeoHud";
+      hud.innerHTML = `
+        <span class="vimeoTime">0:00</span>
+        <input class="vimeoProgress" type="range" min="0" max="1000" value="0" aria-label="Postęp filmu">
+        <input class="vimeoVol" type="range" min="0" max="100" value="100" aria-label="Głośność">
+        <select class="vimeoQuality" aria-label="Jakość filmu">
+          <option value="auto">Auto</option>
+        </select>
+      `;
+      return hud;
+    }
+
+    function wireVimeoControls(player, holder){
+      const hud = makeVimeoHud();
+      holder.appendChild(hud);
+
+      const timeEl = hud.querySelector(".vimeoTime");
+      const progress = hud.querySelector(".vimeoProgress");
+      const volume = hud.querySelector(".vimeoVol");
+      const quality = hud.querySelector(".vimeoQuality");
+      let duration = 0;
+      let seeking = false;
+
+      hud.addEventListener("click", e => e.stopPropagation());
+      hud.addEventListener("pointerdown", e => e.stopPropagation());
+
+      player.getDuration().then(d => { duration = Number(d) || 0; }).catch(()=>{});
+
+      player.getVolume().then(v => {
+        volume.value = Math.round((Number(v) || 0) * 100);
+      }).catch(()=>{});
+
+      volume.addEventListener("input", () => {
+        player.setVolume(Number(volume.value) / 100).catch(()=>{});
+      });
+
+      progress.addEventListener("input", () => {
+        seeking = true;
+        const seconds = duration * (Number(progress.value) / 1000);
+        timeEl.textContent = formatVimeoTime(seconds);
+      });
+
+      progress.addEventListener("change", () => {
+        const seconds = duration * (Number(progress.value) / 1000);
+        player.setCurrentTime(seconds).catch(()=>{}).finally(() => { seeking = false; });
+      });
+
+      if(typeof player.getQualities === "function"){
+        player.getQualities().then(list => {
+          if(!Array.isArray(list) || !list.length){
+            quality.style.display = "none";
+            return;
+          }
+
+          quality.innerHTML = '<option value="auto">Auto</option>';
+          list.forEach(item => {
+            const id = item.id || item.quality || item.label;
+            const label = item.label || item.quality || item.id;
+            if(!id || String(id).toLowerCase() === "auto") return;
+            const opt = document.createElement("option");
+            opt.value = id;
+            opt.textContent = label;
+            quality.appendChild(opt);
+          });
+        }).catch(() => {
+          quality.style.display = "none";
+        });
+
+        quality.addEventListener("change", () => {
+          if(typeof player.setQuality === "function"){
+            player.setQuality(quality.value).catch(()=>{});
+          }
+        });
+      } else {
+        quality.style.display = "none";
+      }
+
+      player.on("timeupdate", data => {
+        duration = Number(data.duration) || duration || 0;
+        const seconds = Number(data.seconds) || 0;
+
+        if(!seeking && duration > 0){
+          progress.value = Math.round((seconds / duration) * 1000);
+        }
+
+        timeEl.textContent = formatVimeoTime(seconds);
+      });
+
+      player.on("loaded", () => {
+        player.getDuration().then(d => { duration = Number(d) || 0; }).catch(()=>{});
+      });
+
+      return hud;
+    }
+
+    function toggleVimeoPlayer(player){
+      player.getPaused().then(paused => {
+        if(paused){
+          player.play().catch(()=>{});
+        } else {
+          player.pause().catch(()=>{});
+        }
+      }).catch(() => {
+        player.play().catch(()=>{});
+      });
     }
 
     function attachInlineVimeoPlayers(){
@@ -5451,13 +5647,14 @@
         const frame = thumb.querySelector('iframe[src*="player.vimeo.com/video/"]');
         if(!frame || thumb.querySelector(".vimeoPlayLayer")) return;
 
-        const layer = makePlayLayer("Odtwórz lub zatrzymaj wideo");
+        const layer = makePlayLayer("Odtwórz albo zatrzymaj wideo");
         thumb.appendChild(layer);
 
         const player = getVimeoPlayer(frame);
         if(!player) return;
 
         player.setLoop(true).catch(()=>{});
+        wireVimeoControls(player, thumb);
 
         player.on("play", () => {
           thumb.classList.add("vimeoPlaying");
@@ -5475,16 +5672,7 @@
         layer.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-
-          player.getPaused().then(paused => {
-            if(paused){
-              player.play().catch(()=>{});
-            } else {
-              player.pause().catch(()=>{});
-            }
-          }).catch(() => {
-            player.play().catch(()=>{});
-          });
+          toggleVimeoPlayer(player);
         });
       });
     }
@@ -5553,6 +5741,8 @@
         modalMedia.classList.remove("vimeoPlaying");
         const oldLayer = modalMedia.querySelector(".vimeoPlayLayer");
         if(oldLayer) oldLayer.remove();
+        const oldHud = modalMedia.querySelector(".vimeoHud");
+        if(oldHud) oldHud.remove();
       }
 
       modalFrame.style.display = "none";
@@ -5574,6 +5764,7 @@
 
       modalVimeoPlayer = new Vimeo.Player(modalFrame);
       modalVimeoPlayer.setLoop(true).catch(()=>{});
+      wireVimeoControls(modalVimeoPlayer, modalMedia);
 
       modalVimeoPlayer.on("loaded", () => {
         showLoader(false);
@@ -5596,16 +5787,7 @@
       layer.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        modalVimeoPlayer.getPaused().then(paused => {
-          if(paused){
-            modalVimeoPlayer.play().catch(()=>{});
-          } else {
-            modalVimeoPlayer.pause().catch(()=>{});
-          }
-        }).catch(() => {
-          modalVimeoPlayer.play().catch(()=>{});
-        });
+        toggleVimeoPlayer(modalVimeoPlayer);
       });
     }
 
