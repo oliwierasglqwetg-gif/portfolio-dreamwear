@@ -4589,13 +4589,44 @@
             </article>
           </div>
 
-          <div class="morebar reveal" id="moreBtn" role="button" tabindex="0" aria-expanded="false">
-            <b><span id="moreText">Pokaż więcej</span></b>
-            <span class="chev" id="moreChev">▾</span>
+          <div class="moreLaunchWrap reveal">
+            <a class="moreLaunch" href="#wiecej-realizacji" aria-label="Zobacz więcej realizacji">
+              <span class="moreLaunchGlow" aria-hidden="true"></span>
+              <span class="moreLaunchIcon">✦</span>
+              <span class="moreLaunchText">
+                <b>Zobacz więcej realizacji</b>
+                <small>pełne portfolio, więcej stylów i dodatkowe przykłady</small>
+              </span>
+              <span class="moreLaunchCount">10+</span>
+            </a>
           </div>
+        </div>
+      </section>
 
-          <div class="moreWrap" id="moreWrap">
-            <div class="moreGrid">
+      <section class="section morePage" id="wiecej-realizacji" aria-label="Więcej realizacji">
+        <div class="morePageTopbar reveal">
+          <a class="morePageBrand" href="#portfolio" data-back-home aria-label="Wróć do strony głównej">
+            <span class="morePageLogo"><img src="assets/Favicon.png" alt="Lumocut" /></span>
+            <span><b>Lumocut</b><small>więcej realizacji</small></span>
+          </a>
+
+          <a class="moreBackBtn" href="#portfolio" data-back-home>Wróć</a>
+
+          <a class="moreIgBtn" href="https://www.instagram.com/oliwierimianowski/" target="_blank" rel="noopener">Napisz na IG</a>
+        </div>
+
+        <div class="morePageHero reveal">
+          <div class="moreHeroBadge">✦ Portfolio Lumocut</div>
+          <h2>Więcej realizacji</h2>
+          <p>Zobacz dodatkowe przykłady pracy: talking head, krótkie materiały, motion design i montaż pod social media.</p>
+        </div>
+
+        <div class="moreCategory reveal">
+          <div class="moreCategoryHead">
+            <h3>Talking Head</h3>
+            <p>Przykłady montażu na prawdziwych materiałach: rozmowa, tempo, napisy i rytm rolki.</p>
+          </div>
+          <div class="moreGrid morePageGrid">
 
               <article class="project reveal" data-title="Rolka #4" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Rolka #4">
@@ -4701,7 +4732,7 @@
                   </div>
                 </div>
               </article>
-</div>
+
           </div>
         </div>
       </section>
@@ -6010,20 +6041,44 @@
     const moreChev = document.getElementById("moreChev");
 
     function toggleMore(){
+      if(!moreBtn || !moreWrap) return;
       const open = moreWrap.classList.toggle("open");
       moreBtn.setAttribute("aria-expanded", open ? "true" : "false");
-      moreText.textContent = open ? "Zwiń" : "Pokaż więcej";
-      moreChev.textContent = open ? "▴" : "▾";
+      if(moreText) moreText.textContent = open ? "Zwiń" : "Pokaż więcej";
+      if(moreChev) moreChev.textContent = open ? "▴" : "▾";
     }
 
-    moreBtn.addEventListener("click", toggleMore);
+    if(moreBtn){
+      moreBtn.addEventListener("click", toggleMore);
+      moreBtn.addEventListener("keydown", (e) => {
+        if(e.key === "Enter" || e.key === " "){
+          e.preventDefault();
+          toggleMore();
+        }
+      });
+    }
 
-    moreBtn.addEventListener("keydown", (e) => {
-      if(e.key === "Enter" || e.key === " "){
-        e.preventDefault();
-        toggleMore();
-      }
-    });
+    const pageScroller = document.querySelector(".scroll");
+    const baseTitle = document.title;
+
+    function setMoreRoute(){
+      const isMore = window.location.hash === "#wiecej-realizacji";
+      document.body.classList.toggle("moreRoute", isMore);
+      document.title = isMore ? "Więcej realizacji • Lumocut" : baseTitle;
+
+      requestAnimationFrame(() => {
+        if(isMore){
+          if(pageScroller) pageScroller.scrollTo({ top: 0, behavior: "auto" });
+          else window.scrollTo({ top: 0, behavior: "auto" });
+        }else if(window.location.hash === "#portfolio"){
+          const portfolio = document.getElementById("portfolio");
+          if(portfolio) portfolio.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
+
+    window.addEventListener("hashchange", setMoreRoute);
+    setMoreRoute();
 
     document.querySelectorAll(".faqItem").forEach(d => {
       const icon = d.querySelector(".faqIcon");
