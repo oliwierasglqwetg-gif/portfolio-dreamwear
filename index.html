@@ -2789,6 +2789,414 @@
       padding-top: 6px;
     }
 
+
+
+    /* === WIĘCEJ REALIZACJI, DUŻY PRZYCISK I OSOBNY WIDOK === */
+    .moreLaunchWrap{
+      position:relative;
+      margin: 34px auto 10px;
+      min-height: 138px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      isolation:isolate;
+    }
+
+    .moreLaunchWrap::before,
+    .moreLaunchWrap::after{
+      content:"";
+      position:absolute;
+      top:50%;
+      width:min(310px, 34%);
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), rgba(251,113,133,.32), transparent);
+      opacity:.85;
+      pointer-events:none;
+    }
+
+    .moreLaunchWrap::before{ right: calc(50% + 210px); }
+    .moreLaunchWrap::after{ left: calc(50% + 210px); transform:scaleX(-1); }
+
+    .moreLaunch{
+      position:relative;
+      width:min(420px, 92%);
+      min-height:76px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      padding: 15px 18px;
+      border-radius: 26px;
+      border:1px solid rgba(255,255,255,.22);
+      background:
+        radial-gradient(280px 130px at 18% 25%, rgba(251,113,133,.28), transparent 65%),
+        radial-gradient(260px 130px at 86% 20%, rgba(52,211,153,.18), transparent 68%),
+        linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.045));
+      box-shadow:
+        0 24px 80px rgba(0,0,0,.58),
+        0 0 56px rgba(251,113,133,.16),
+        0 0 48px rgba(52,211,153,.08),
+        inset 0 0 0 1px rgba(255,255,255,.045);
+      overflow:hidden;
+      transform: translateZ(0);
+      animation: moreButtonFloat 3.4s ease-in-out infinite;
+    }
+
+    .moreLaunch::before{
+      content:"";
+      position:absolute;
+      inset: -2px;
+      border-radius: inherit;
+      padding: 2px;
+      background: conic-gradient(from 180deg, rgba(251,113,133,0), rgba(251,113,133,.75), rgba(52,211,153,.55), rgba(251,191,36,.55), rgba(251,113,133,0));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity:.8;
+      animation: moreBorderSpin 5.5s linear infinite;
+      pointer-events:none;
+    }
+
+    .moreLaunch::after{
+      content:"";
+      position:absolute;
+      inset: 8px;
+      border-radius: 20px;
+      border: 1px dashed rgba(255,255,255,.18);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .moreLaunchGlow{
+      position:absolute;
+      width:110px;
+      height:110px;
+      left:-38px;
+      top:-40px;
+      border-radius:999px;
+      background: radial-gradient(circle, rgba(251,113,133,.38), transparent 67%);
+      filter: blur(2px);
+      animation: moreGlowMove 4.6s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    .moreLaunchIcon{
+      position:relative;
+      z-index:1;
+      width:38px;
+      height:38px;
+      border-radius: 16px;
+      display:grid;
+      place-items:center;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.22);
+      box-shadow: 0 0 28px rgba(251,113,133,.24);
+      font-size:18px;
+      color: rgba(255,255,255,.95);
+      flex:0 0 auto;
+    }
+
+    .moreLaunchText{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      line-height:1.1;
+      min-width:0;
+    }
+
+    .moreLaunchText b{
+      font-size:16px;
+      font-weight:950;
+      letter-spacing:-.15px;
+      color:rgba(255,255,255,.96);
+      text-shadow: 0 0 24px rgba(251,113,133,.18);
+    }
+
+    .moreLaunchText small{
+      margin-top:5px;
+      font-size:11px;
+      color:rgba(255,255,255,.62);
+    }
+
+    .moreLaunchCount{
+      position:relative;
+      z-index:1;
+      height:32px;
+      min-width:44px;
+      padding:0 10px;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.20);
+      color:rgba(251,191,36,.96);
+      font-family:var(--mono);
+      font-weight:950;
+      font-size:11px;
+      box-shadow:0 0 24px rgba(251,191,36,.12);
+      flex:0 0 auto;
+    }
+
+    .moreLaunch:hover{
+      transform: translateY(-3px) scale(1.015);
+      border-color: rgba(255,255,255,.30);
+      box-shadow:
+        0 30px 95px rgba(0,0,0,.64),
+        0 0 72px rgba(251,113,133,.22),
+        0 0 58px rgba(52,211,153,.12),
+        inset 0 0 0 1px rgba(255,255,255,.055);
+    }
+
+    @keyframes moreButtonFloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-6px); } }
+    @keyframes moreBorderSpin{ to{ transform:rotate(360deg); } }
+    @keyframes moreGlowMove{ 0%,100%{ transform:translate(0,0); opacity:.75; } 50%{ transform:translate(265px,34px); opacity:.45; } }
+
+    .morePage{ display:none; }
+
+    body.moreRoute .topbar,
+    body.moreRoute .sideNav{ display:none !important; }
+
+    body.moreRoute .wrap > section:not(.morePage){ display:none !important; }
+    body.moreRoute .morePage{ display:block !important; }
+    body.moreRoute .wrap{
+      max-width: 980px;
+      padding-top: 18px;
+      padding-bottom: 90px;
+    }
+
+    .morePageTopbar{
+      position:sticky;
+      top:calc(env(safe-area-inset-top) + 14px);
+      z-index:60;
+      width:min(860px, 100%);
+      margin:0 auto 46px;
+      height:56px;
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(9,8,18,.70);
+      backdrop-filter: blur(14px);
+      box-shadow:0 22px 70px rgba(0,0,0,.54), inset 0 0 0 1px rgba(255,255,255,.035);
+    }
+
+    .morePageBrand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+
+    .morePageLogo{
+      width:38px;
+      height:38px;
+      border-radius:14px;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(255,255,255,.06);
+      box-shadow:0 0 26px rgba(251,113,133,.12);
+      flex:0 0 auto;
+    }
+
+    .morePageLogo img{ width:100%; height:100%; object-fit:contain; padding:2px; display:block; }
+    .morePageBrand b{ display:block; font-size:13px; line-height:1.05; color:rgba(255,255,255,.94); }
+    .morePageBrand small{ display:block; margin-top:2px; font-size:10px; color:rgba(255,255,255,.55); }
+
+    .moreBackBtn{
+      min-width:112px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.20);
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+      color:rgba(255,255,255,.92);
+      font-size:12px;
+      font-weight:950;
+      box-shadow:0 0 34px rgba(251,113,133,.10);
+    }
+
+    .moreIgBtn{
+      justify-self:end;
+      min-width:110px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border-radius:999px;
+      border:1px solid rgba(251,113,133,.26);
+      background:linear-gradient(135deg, rgba(251,113,133,.78), rgba(52,211,153,.38));
+      color:rgba(255,255,255,.96);
+      font-size:12px;
+      font-weight:950;
+      box-shadow:0 16px 46px rgba(251,113,133,.12);
+    }
+
+    .morePageHero{
+      width:min(860px, 100%);
+      margin:0 auto 72px;
+      min-height:170px;
+      border-radius:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:34px 22px;
+      border:1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(520px 190px at 50% 0%, rgba(251,113,133,.14), transparent 68%),
+        radial-gradient(480px 190px at 88% 0%, rgba(52,211,153,.08), transparent 66%),
+        rgba(255,255,255,.045);
+      box-shadow:0 26px 80px rgba(0,0,0,.55), inset 0 0 0 1px rgba(255,255,255,.025);
+    }
+
+    .moreHeroBadge{
+      width:fit-content;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.76);
+      font-family:var(--mono);
+      font-size:10px;
+      font-weight:950;
+      margin-bottom:13px;
+    }
+
+    .morePageHero h2{
+      margin:0;
+      font-size:clamp(34px, 5vw, 54px);
+      line-height:1;
+      letter-spacing:-1.1px;
+      color:rgba(255,255,255,.94);
+      text-shadow:0 0 40px rgba(251,113,133,.12);
+    }
+
+    .morePageHero p{
+      width:min(560px, 100%);
+      margin:14px auto 0;
+      color:rgba(255,255,255,.66);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .moreCategory{
+      width:min(720px, 100%);
+      margin:0 auto 76px;
+    }
+
+    .motionCat{ width:min(860px, 100%); }
+
+    .moreCategoryHead{
+      text-align:center;
+      margin:0 auto 20px;
+    }
+
+    .moreCategoryHead h3{
+      margin:0;
+      font-size:clamp(28px, 4vw, 40px);
+      line-height:1.05;
+      letter-spacing:-.7px;
+      color:rgba(255,255,255,.92);
+    }
+
+    .moreCategoryHead h3::after{
+      content:"";
+      display:block;
+      width:min(360px, 74%);
+      height:1px;
+      margin:14px auto 0;
+      background:linear-gradient(90deg, transparent, rgba(251,113,133,.28), transparent);
+      box-shadow:0 0 24px rgba(251,113,133,.12);
+    }
+
+    .moreCategoryHead p{
+      width:min(560px, 100%);
+      margin:12px auto 0;
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    .morePageGrid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+      align-items:start;
+    }
+
+    .motionCat .morePageGrid{
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+    }
+
+    .morePageGrid .project{
+      border-radius:16px;
+      background:rgba(4,5,10,.76);
+      border-color:rgba(251,113,133,.18);
+      box-shadow:0 22px 62px rgba(0,0,0,.48), 0 0 36px rgba(251,113,133,.045);
+      padding:10px;
+    }
+
+    .morePageGrid .thumb{
+      border-radius:12px;
+      min-height:0;
+      aspect-ratio:9/16;
+      background:rgba(255,255,255,.035);
+    }
+
+    .morePageGrid .meta{
+      padding:10px 0 2px;
+    }
+
+    .morePageGrid .meta h4{
+      margin:0;
+      font-size:13px;
+      color:rgba(255,255,255,.94);
+      line-height:1.2;
+    }
+
+    .morePageGrid .meta p{
+      margin:4px 0 0;
+      color:rgba(255,255,255,.64);
+      font-size:11px;
+      line-height:1.45;
+    }
+
+    .morePageGrid .tags{ display:none; }
+
+    @media (max-width: 760px){
+      .moreLaunchWrap{ min-height:128px; margin-top:30px; }
+      .moreLaunchWrap::before,.moreLaunchWrap::after{ display:none; }
+      .moreLaunch{ width:100%; min-height:74px; border-radius:24px; }
+      .moreLaunchText b{ font-size:15px; }
+      .moreLaunchText small{ font-size:10px; }
+      body.moreRoute .wrap{ padding-left:14px; padding-right:14px; padding-top:12px; }
+      .morePageTopbar{ grid-template-columns:1fr auto; margin-bottom:34px; height:auto; border-radius:24px; }
+      .moreBackBtn{ grid-column:1 / -1; grid-row:1; justify-self:center; min-width:132px; }
+      .morePageBrand{ grid-column:1; grid-row:2; }
+      .moreIgBtn{ grid-column:2; grid-row:2; min-width:96px; }
+      .morePageHero{ margin-bottom:54px; min-height:154px; }
+      .morePageHero h2{ font-size:36px; }
+      .morePageGrid, .motionCat .morePageGrid{ grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; }
+      .moreCategory{ margin-bottom:58px; }
+      .morePageGrid .project{ padding:8px; border-radius:14px; }
+    }
+
+    @media (max-width: 430px){
+      .morePageGrid, .motionCat .morePageGrid{ grid-template-columns:1fr; }
+      .morePageGrid .project{ width:min(260px, 100%); margin:0 auto; }
+      .moreLaunch{ gap:10px; padding:14px 12px; }
+      .moreLaunchIcon{ width:34px; height:34px; }
+      .moreLaunchCount{ display:none; }
+    }
+
     @media (max-width: 1460px){
       .sideNav{
         display:none;
@@ -4603,7 +5011,7 @@
         </div>
       </section>
 
-      <section class="section morePage" id="wiecej-realizacji" aria-label="Więcej realizacji">
+            <section class="section morePage" id="wiecej-realizacji" aria-label="Więcej realizacji">
         <div class="morePageTopbar reveal">
           <a class="morePageBrand" href="#portfolio" data-back-home aria-label="Wróć do strony głównej">
             <span class="morePageLogo"><img src="assets/Favicon.png" alt="Lumocut" /></span>
@@ -4618,126 +5026,134 @@
         <div class="morePageHero reveal">
           <div class="moreHeroBadge">✦ Portfolio Lumocut</div>
           <h2>Więcej realizacji</h2>
-          <p>Zobacz dodatkowe przykłady pracy: talking head, krótkie materiały, motion design i montaż pod social media.</p>
+          <p>Zobacz dodatkowe przykłady pracy Lumocut: talking head, krótkie CTA i animacje 2D.</p>
         </div>
 
-        <div class="moreCategory reveal">
+        <div class="moreCategory reveal talkingHeadCat">
           <div class="moreCategoryHead">
             <h3>Talking Head</h3>
             <p>Przykłady montażu na prawdziwych materiałach: rozmowa, tempo, napisy i rytm rolki.</p>
           </div>
           <div class="moreGrid morePageGrid">
-
               <article class="project reveal" data-title="Rolka #4" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Rolka #4">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_4"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>Rolka #4</h4>
-                  <p>Dynamiczne cięcia, napisy, pod shorty.</p>
+                  <h4>Montaż Talking Head</h4>
+                  <p>styl Lumocut</p>
                   <div class="tags">
                     <span class="tag">Reels</span><span class="tag">Tempo</span><span class="tag">Napisy</span>
                   </div>
                 </div>
               </article>
-
               <article class="project reveal" data-title="OD #1" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #1">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_1"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>OD #1</h4>
-                  <p>Hook + rytm, szybkie przejścia i czytelność.</p>
+                  <h4>Montaż Talking Head</h4>
+                  <p>styl Lumocut + napisy</p>
                   <div class="tags">
                     <span class="tag">Hook</span><span class="tag">Beat</span><span class="tag">Clean</span>
                   </div>
                 </div>
               </article>
+          </div>
+        </div>
 
+        <div class="moreCategory reveal ctaCat">
+          <div class="moreCategoryHead">
+            <h3>Wezwanie do działania (CTA)</h3>
+            <p>Krótkie momenty, które prowadzą widza do konkretnej akcji: komentarz albo obserwacja.</p>
+          </div>
+          <div class="moreGrid morePageGrid">
               <article class="project reveal" data-title="OD #2" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #2">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_2"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>OD #2</h4>
-                  <p>Pod TikToka: tempo, napisy i mocny start.</p>
+                  <h4>Krótki CTA</h4>
+                  <p>komentarz albo obserwacja</p>
                   <div class="tags">
                     <span class="tag">TikTok</span><span class="tag">Tempo</span><span class="tag">Napisy</span>
                   </div>
                 </div>
               </article>
-
               <article class="project reveal" data-title="OD #3" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #3">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_3"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>OD #3</h4>
-                  <p>Efekty + vibe, bez przesady, ale dobrze dopasowane.</p>
+                  <h4>Krótki CTA</h4>
+                  <p>dynamiczne wezwanie</p>
                   <div class="tags">
                     <span class="tag">Efekty</span><span class="tag">Vibe</span><span class="tag">SFX</span>
                   </div>
                 </div>
               </article>
+          </div>
+        </div>
 
+        <div class="moreCategory reveal motionCat">
+          <div class="moreCategoryHead">
+            <h3>Animacje 2D</h3>
+            <p>Animacje, napisy i elementy graficzne dopasowane do klimatu rolki.</p>
+          </div>
+          <div class="moreGrid morePageGrid">
               <article class="project reveal" data-title="OD #4" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="OD #4">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_4"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>OD #4</h4>
-                  <p>Krótko, konkretnie, pod retention.</p>
+                  <h4>Motion design</h4>
+                  <p>animacja</p>
                   <div class="tags">
                     <span class="tag">Retention</span><span class="tag">Hook</span><span class="tag">Tempo</span>
                   </div>
                 </div>
               </article>
-
-            
               <article class="project reveal" data-title="Video #1" data-video="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Video #1">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_1"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>Video #1</h4>
-                  <p>Przykład w formacie poziomym: większy kadr, czysty montaż i dobry rytm.</p>
+                  <h4>Motion design</h4>
+                  <p>plansza / animacja</p>
                   <div class="tags">
                     <span class="tag">16:9</span><span class="tag">Portfolio</span><span class="tag">Montaż</span>
                   </div>
                 </div>
               </article>
-
               <article class="project reveal" data-title="Video #2" data-video="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Video #2">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_2"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>Video #2</h4>
-                  <p>Dodatkowy przykład montażu pod portfolio i social media.</p>
+                  <h4>Motion design</h4>
+                  <p>grafika 2D</p>
                   <div class="tags">
                     <span class="tag">Reels</span><span class="tag">Tempo</span><span class="tag">SFX</span>
                   </div>
                 </div>
               </article>
-
               <article class="project reveal" data-title="Video #3" data-video="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Video #3">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_3"></iframe>
                 </div>
                 <div class="meta">
-                  <h4>Video #3</h4>
-                  <p>Kolejny przykład stylu: napisy, cięcia i energia materiału.</p>
+                  <h4>Motion design</h4>
+                  <p>animacja 2D</p>
                   <div class="tags">
                     <span class="tag">Napisy</span><span class="tag">Cięcia</span><span class="tag">Vibe</span>
                   </div>
                 </div>
               </article>
-
           </div>
         </div>
       </section>
 
-      <section class="section" id="cennik">
+<section class="section" id="cennik">
         <div class="sectionBox pricingSection" style="--labelGlowStrong: rgba(251,191,36,.25); --labelColor: rgba(251,191,36,.96);">
           <div class="sectionLabel reveal"><i>💸</i> SEKCJA / <span>CENNIK</span></div>
 
