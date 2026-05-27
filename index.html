@@ -3870,6 +3870,162 @@
       }
     }
 
+  
+    /* Vimeo portfolio poprawka: rolki pionowe 9:16 obok siebie */
+    #portfolio .projects,
+    #portfolio .moreGrid{
+      width: 100%;
+      max-width: 1120px;
+      margin-left: auto;
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    #portfolio .project{
+      width: 100%;
+      border-radius: 28px;
+    }
+
+    #portfolio .thumb{
+      height: auto;
+      aspect-ratio: 9 / 16;
+      min-height: 0;
+      cursor: default;
+      background: #000;
+    }
+
+    #portfolio .thumb::after{
+      content: "";
+      display: none;
+      pointer-events: none;
+    }
+
+    #portfolio .thumbVideo,
+    #portfolio .vimeoThumb{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 0;
+      display: block;
+      background: #000;
+    }
+
+    #portfolio .meta{
+      padding: 16px 18px 18px;
+    }
+
+    #portfolio .meta h4{
+      font-size: 17px;
+    }
+
+    #portfolio .meta p{
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px){
+      #portfolio .projects,
+      #portfolio .moreGrid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 560px){
+      .wrap{
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      #portfolio{
+        margin-top: 42px;
+      }
+
+      #portfolio .sectionBox{
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      #portfolio .projects,
+      #portfolio .moreGrid{
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      #portfolio .project{
+        max-width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 24px;
+      }
+
+      #portfolio .meta{
+        padding: 14px;
+      }
+
+      #portfolio .meta h4{
+        font-size: 16px;
+      }
+
+      #portfolio .meta p{
+        font-size: 13px;
+      }
+    }
+
+    .modalBox{
+      max-width: min(460px, calc(100vw - 22px));
+      margin: 4vh auto;
+    }
+
+    .modalMedia{
+      aspect-ratio: 9 / 16;
+    }
+
+    @media (max-width: 560px){
+      .wrap{
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      #portfolio{
+        margin-top: 42px;
+      }
+
+      #portfolio .sectionBox{
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+
+      #portfolio .projects,
+      #portfolio .moreGrid{
+        gap: 18px;
+      }
+
+      #portfolio .project{
+        border-radius: 22px;
+      }
+
+      #portfolio .meta{
+        padding: 14px;
+      }
+
+      #portfolio .meta h4{
+        font-size: 16px;
+      }
+
+      #portfolio .meta p{
+        font-size: 13px;
+      }
+
+      .modalBox{
+        width: calc(100% - 12px);
+        margin: 8vh auto;
+      }
+    }
+
   </style>
 </head>
 
@@ -4062,9 +4218,9 @@
           </div>
 
           <div class="projects">
-            <article class="project reveal" data-title="Rolka #1" data-video="assets/FAJNA1.mp4">
+            <article class="project reveal" data-title="Rolka #1" data-video="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
               <div class="thumb" aria-label="Rolka #1">
-                <video class="thumbVideo" src="assets/FAJNA1.mp4" data-fallback-src="assets/FAJNA1.mp4" muted loop playsinline preload="auto" autoplay></video>
+                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FAJNA1"></iframe>
               </div>
               <div class="meta">
                 <h4>Rolka #1</h4>
@@ -4075,9 +4231,9 @@
               </div>
             </article>
 
-            <article class="project reveal" data-title="Rolka #2" data-video="assets/FAJNA2.mp4">
+            <article class="project reveal" data-title="Rolka #2" data-video="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
               <div class="thumb" aria-label="Rolka #2">
-                <video class="thumbVideo" src="assets/FAJNA2.mp4" muted loop playsinline preload="auto" autoplay></video>
+                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="FAJNA2"></iframe>
               </div>
               <div class="meta">
                 <h4>Rolka #2</h4>
@@ -4088,9 +4244,9 @@
               </div>
             </article>
 
-            <article class="project reveal" data-title="Rolka #3" data-video="assets/OWCA.mp4">
+            <article class="project reveal" data-title="Rolka #3" data-video="https://player.vimeo.com/video/1195982932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
               <div class="thumb" aria-label="Rolka #3">
-                <video class="thumbVideo" src="assets/OWCA.mp4" muted loop playsinline preload="auto" autoplay></video>
+                <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982932?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OWCA"></iframe>
               </div>
               <div class="meta">
                 <h4>Rolka #3</h4>
@@ -4110,9 +4266,9 @@
           <div class="moreWrap" id="moreWrap">
             <div class="moreGrid">
 
-              <article class="project reveal" data-title="Rolka #4" data-video="assets/Video_4.mp4">
+              <article class="project reveal" data-title="Rolka #4" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <div class="thumb" aria-label="Rolka #4">
-                  <video class="thumbVideo" src="assets/Video_4.mp4" muted loop playsinline preload="auto" autoplay></video>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_4"></iframe>
                 </div>
                 <div class="meta">
                   <h4>Rolka #4</h4>
@@ -4123,9 +4279,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #1" data-video="assets/OD_1.mp4">
+              <article class="project reveal" data-title="OD #1" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <div class="thumb" aria-label="OD #1">
-                  <video class="thumbVideo" src="assets/OD_1.mp4" muted loop playsinline preload="auto" autoplay></video>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_1"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #1</h4>
@@ -4136,9 +4292,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #2" data-video="assets/OD_2.mp4">
+              <article class="project reveal" data-title="OD #2" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <div class="thumb" aria-label="OD #2">
-                  <video class="thumbVideo" src="assets/OD_2.mp4" muted loop playsinline preload="auto" autoplay></video>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_2"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #2</h4>
@@ -4149,9 +4305,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #3" data-video="assets/OD_3.mp4">
+              <article class="project reveal" data-title="OD #3" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <div class="thumb" aria-label="OD #3">
-                  <video class="thumbVideo" src="assets/OD_3.mp4" muted loop playsinline preload="auto" autoplay></video>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_3"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #3</h4>
@@ -4162,9 +4318,9 @@
                 </div>
               </article>
 
-              <article class="project reveal" data-title="OD #4" data-video="assets/OD_4.mp4">
+              <article class="project reveal" data-title="OD #4" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <div class="thumb" aria-label="OD #4">
-                  <video class="thumbVideo" src="assets/OD_4.mp4" muted loop playsinline preload="auto" autoplay></video>
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_4"></iframe>
                 </div>
                 <div class="meta">
                   <h4>OD #4</h4>
@@ -4175,7 +4331,46 @@
                 </div>
               </article>
 
-            </div>
+            
+              <article class="project reveal" data-title="Video #1" data-video="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+                <div class="thumb" aria-label="Video #1">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_1"></iframe>
+                </div>
+                <div class="meta">
+                  <h4>Video #1</h4>
+                  <p>Przykład w formacie poziomym: większy kadr, czysty montaż i dobry rytm.</p>
+                  <div class="tags">
+                    <span class="tag">16:9</span><span class="tag">Portfolio</span><span class="tag">Montaż</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project reveal" data-title="Video #2" data-video="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+                <div class="thumb" aria-label="Video #2">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_2"></iframe>
+                </div>
+                <div class="meta">
+                  <h4>Video #2</h4>
+                  <p>Dodatkowy przykład montażu pod portfolio i social media.</p>
+                  <div class="tags">
+                    <span class="tag">Reels</span><span class="tag">Tempo</span><span class="tag">SFX</span>
+                  </div>
+                </div>
+              </article>
+
+              <article class="project reveal" data-title="Video #3" data-video="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
+                <div class="thumb" aria-label="Video #3">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_3"></iframe>
+                </div>
+                <div class="meta">
+                  <h4>Video #3</h4>
+                  <p>Kolejny przykład stylu: napisy, cięcia i energia materiału.</p>
+                  <div class="tags">
+                    <span class="tag">Napisy</span><span class="tag">Cięcia</span><span class="tag">Vibe</span>
+                  </div>
+                </div>
+              </article>
+</div>
           </div>
         </div>
       </section>
@@ -4260,7 +4455,7 @@
                 <div class="pricePoint"><i>✓</i><span><b>Czyste cięcia</b> bez przeładowania efektami</span></div>
               </div>
 
-              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu Clean" data-video="assets/FAJNA1.mp4">
+              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu Clean" data-video="https://player.vimeo.com/video/1195982864?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <i>▶</i>
                 <div>Podgląd stylu<br><span>zobacz przykład Clean</span></div>
               </button>
@@ -4313,7 +4508,7 @@
                 <div class="pricePoint"><i>✓</i><span><b>Animowane elementy</b> podkreślające najważniejsze fragmenty</span></div>
               </div>
 
-              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu OWLLX" data-video="assets/FAJNA2.mp4">
+              <button class="stylePreviewMini" type="button" data-title="Podgląd stylu OWLLX" data-video="https://player.vimeo.com/video/1195982875?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479">
                 <i>▶</i>
                 <div>Podgląd stylu<br><span>zobacz przykład OWLLX</span></div>
               </button>
@@ -5248,5 +5443,6 @@
       }, { passive: false });
     })();
   </script>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
