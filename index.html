@@ -3923,27 +3923,29 @@
       place-items:center;
       cursor:pointer;
       background:
-        radial-gradient(260px 260px at 50% 50%, rgba(0,0,0,.24), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.06), rgba(0,0,0,.36));
+        radial-gradient(360px 360px at 50% 50%, rgba(0,0,0,.18), transparent 64%),
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.34));
       border:0;
       padding:0;
       color: rgba(255,255,255,.96);
-      transition: background .18s ease;
+      transition: opacity .18s ease, background .18s ease;
     }
 
     .vimeoPlayLayer::before{
       content:"";
-      width: 68px;
-      height: 68px;
+      width: 72px;
+      height: 72px;
       border-radius: 999px;
       background:
-        radial-gradient(circle at 35% 28%, rgba(255,255,255,.22), transparent 44%),
-        rgba(0,0,0,.52);
-      border: 1px solid rgba(255,255,255,.24);
+        linear-gradient(180deg, rgba(255,255,255,.20), rgba(255,255,255,.06)),
+        rgba(12,14,20,.46);
+      border: 1px solid rgba(255,255,255,.22);
       box-shadow:
-        0 18px 50px rgba(0,0,0,.48),
-        0 0 34px rgba(52,211,153,.13);
-      backdrop-filter: blur(10px);
+        0 20px 55px rgba(0,0,0,.48),
+        inset 0 1px 0 rgba(255,255,255,.18),
+        inset 0 -1px 0 rgba(255,255,255,.06);
+      backdrop-filter: blur(18px) saturate(1.25);
+      -webkit-backdrop-filter: blur(18px) saturate(1.25);
       transition: transform .18s ease, opacity .18s ease;
     }
 
@@ -3963,20 +3965,27 @@
     }
 
     .vimeoPlayLayer:hover::before{
-      transform: scale(1.06);
+      transform: scale(1.05);
     }
 
     .thumb.vimeoPlaying .vimeoPlayLayer,
     .modalMedia.vimeoPlaying .vimeoPlayLayer{
+      opacity: 0;
       background: transparent;
     }
 
-    .thumb.vimeoPlaying .vimeoPlayLayer::before,
-    .thumb.vimeoPlaying .vimeoPlayLayer::after,
-    .modalMedia.vimeoPlaying .vimeoPlayLayer::before,
-    .modalMedia.vimeoPlaying .vimeoPlayLayer::after{
-      opacity: 0;
-      pointer-events: none;
+    .thumb.vimeoPausedAfterPlay .vimeoPlayLayer::after,
+    .modalMedia.vimeoPausedAfterPlay .vimeoPlayLayer::after{
+      left: 50%;
+      width: 18px;
+      height: 27px;
+      border: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,.96) 0 6px,
+          transparent 6px 12px,
+          rgba(255,255,255,.96) 12px 18px);
+      border-radius: 2px;
     }
 
     .vimeoHud{
@@ -3986,40 +3995,70 @@
       bottom: 12px;
       z-index: 8;
       display:grid;
-      grid-template-columns: auto 1fr auto auto;
+      grid-template-columns: auto auto 1fr auto auto;
       align-items:center;
-      gap: 8px;
-      padding: 8px 9px;
-      border-radius: 999px;
+      gap: 9px;
+      padding: 8px 10px;
+      border-radius: 18px;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.42);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 14px 38px rgba(0,0,0,.34);
-      opacity: .92;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.13), rgba(255,255,255,.055)),
+        rgba(10,12,18,.54);
+      backdrop-filter: blur(18px) saturate(1.25);
+      -webkit-backdrop-filter: blur(18px) saturate(1.25);
+      box-shadow:
+        0 18px 48px rgba(0,0,0,.38),
+        inset 0 1px 0 rgba(255,255,255,.14),
+        inset 0 -1px 0 rgba(255,255,255,.055);
+      opacity: .96;
       transition: opacity .18s ease, transform .18s ease;
       pointer-events: auto;
     }
 
     .thumb.vimeoPlaying:not(:hover) .vimeoHud,
     .modalMedia.vimeoPlaying:not(:hover) .vimeoHud{
-      opacity: .36;
+      opacity: .54;
       transform: translateY(2px);
     }
 
+    .vimeoToggleBtn{
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      color: rgba(255,255,255,.92);
+      background: rgba(255,255,255,.075);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+      font-size: 11px;
+      line-height: 1;
+      padding:0;
+      transition: .16s ease;
+    }
+
+    .vimeoToggleBtn:hover{
+      transform: scale(1.05);
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.24);
+    }
+
     .vimeoTime{
-      min-width: 34px;
-      color: rgba(255,255,255,.82);
+      min-width: 37px;
+      color: rgba(255,255,255,.78);
       font-family: var(--mono);
       font-size: 10px;
-      font-weight: 800;
+      font-weight: 850;
       text-align:center;
       line-height:1;
+      font-variant-numeric: tabular-nums;
     }
 
     .vimeoProgress{
       width: 100%;
       height: 4px;
-      accent-color: rgba(52,211,153,.95);
+      accent-color: rgba(52,211,153,.92);
       cursor:pointer;
     }
 
@@ -4028,16 +4067,17 @@
       height: 28px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.08);
-      color: rgba(255,255,255,.88);
+      background: rgba(255,255,255,.075);
+      color: rgba(255,255,255,.86);
       font-size: 11px;
       font-family: var(--font);
       outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.09);
     }
 
     .vimeoVol{
       width: 54px;
-      accent-color: rgba(251,191,36,.95);
+      accent-color: rgba(255,255,255,.86);
     }
 
     .vimeoQuality{
@@ -4056,12 +4096,13 @@
         left: 9px;
         right: 9px;
         bottom: 9px;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: auto auto 1fr auto;
         gap: 6px;
         padding: 7px 8px;
       }
 
       .vimeoVol{ display:none; }
+      .vimeoToggleBtn{ width: 26px; height: 26px; }
       .vimeoQuality{ max-width: 58px; font-size: 10px; padding: 0 5px; }
       .vimeoTime{ min-width: 30px; font-size: 9px; }
     }
@@ -5535,6 +5576,7 @@
       const hud = document.createElement("div");
       hud.className = "vimeoHud";
       hud.innerHTML = `
+        <button class="vimeoToggleBtn" type="button" aria-label="Odtwórz albo zatrzymaj film">▶</button>
         <span class="vimeoTime">0:00</span>
         <input class="vimeoProgress" type="range" min="0" max="1000" value="0" aria-label="Postęp filmu">
         <input class="vimeoVol" type="range" min="0" max="100" value="100" aria-label="Głośność">
@@ -5545,10 +5587,62 @@
       return hud;
     }
 
+    function setVimeoUiState(holder, playing, pausedAfterPlay){
+      if(!holder) return;
+      holder.classList.toggle("vimeoPlaying", !!playing);
+      holder.classList.toggle("vimeoPausedAfterPlay", !!pausedAfterPlay && !playing);
+
+      const btn = holder.querySelector(".vimeoToggleBtn");
+      if(btn){
+        btn.textContent = playing ? "Ⅱ" : "▶";
+        btn.setAttribute("aria-label", playing ? "Zatrzymaj film" : "Odtwórz film");
+      }
+    }
+
+    function updateVimeoHud(holder, seconds, duration){
+      if(!holder) return;
+      const timeEl = holder.querySelector(".vimeoTime");
+      const progress = holder.querySelector(".vimeoProgress");
+      const current = Number(seconds) || 0;
+      const total = Number(duration) || 0;
+
+      if(timeEl) timeEl.textContent = formatVimeoTime(current);
+      if(progress && total > 0 && progress.dataset.seeking !== "1"){
+        progress.value = Math.max(0, Math.min(1000, Math.round((current / total) * 1000)));
+      }
+    }
+
+    function startVimeoProgressLoop(player, holder){
+      if(holder._vimeoProgressTimer) return;
+
+      holder._vimeoProgressTimer = window.setInterval(() => {
+        if(!player) return;
+
+        Promise.all([
+          player.getCurrentTime().catch(() => 0),
+          player.getDuration().catch(() => 0),
+          player.getPaused().catch(() => true)
+        ]).then(([seconds, duration, paused]) => {
+          updateVimeoHud(holder, seconds, duration);
+          if(paused){
+            stopVimeoProgressLoop(holder);
+          }
+        }).catch(()=>{});
+      }, 250);
+    }
+
+    function stopVimeoProgressLoop(holder){
+      if(holder && holder._vimeoProgressTimer){
+        window.clearInterval(holder._vimeoProgressTimer);
+        holder._vimeoProgressTimer = null;
+      }
+    }
+
     function wireVimeoControls(player, holder){
       const hud = makeVimeoHud();
       holder.appendChild(hud);
 
+      const toggleBtn = hud.querySelector(".vimeoToggleBtn");
       const timeEl = hud.querySelector(".vimeoTime");
       const progress = hud.querySelector(".vimeoProgress");
       const volume = hud.querySelector(".vimeoVol");
@@ -5559,7 +5653,18 @@
       hud.addEventListener("click", e => e.stopPropagation());
       hud.addEventListener("pointerdown", e => e.stopPropagation());
 
-      player.getDuration().then(d => { duration = Number(d) || 0; }).catch(()=>{});
+      toggleBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleVimeoPlayer(player, holder);
+      });
+
+      player.getDuration().then(d => {
+        duration = Number(d) || 0;
+        return player.getCurrentTime();
+      }).then(seconds => {
+        updateVimeoHud(holder, seconds, duration);
+      }).catch(()=>{});
 
       player.getVolume().then(v => {
         volume.value = Math.round((Number(v) || 0) * 100);
@@ -5571,13 +5676,19 @@
 
       progress.addEventListener("input", () => {
         seeking = true;
+        progress.dataset.seeking = "1";
         const seconds = duration * (Number(progress.value) / 1000);
         timeEl.textContent = formatVimeoTime(seconds);
       });
 
       progress.addEventListener("change", () => {
         const seconds = duration * (Number(progress.value) / 1000);
-        player.setCurrentTime(seconds).catch(()=>{}).finally(() => { seeking = false; });
+        player.setCurrentTime(seconds).then(() => {
+          updateVimeoHud(holder, seconds, duration);
+        }).catch(()=>{}).finally(() => {
+          seeking = false;
+          progress.dataset.seeking = "0";
+        });
       });
 
       if(typeof player.getQualities === "function"){
@@ -5614,29 +5725,45 @@
         duration = Number(data.duration) || duration || 0;
         const seconds = Number(data.seconds) || 0;
 
-        if(!seeking && duration > 0){
-          progress.value = Math.round((seconds / duration) * 1000);
+        if(!seeking){
+          updateVimeoHud(holder, seconds, duration);
         }
-
-        timeEl.textContent = formatVimeoTime(seconds);
       });
 
       player.on("loaded", () => {
-        player.getDuration().then(d => { duration = Number(d) || 0; }).catch(()=>{});
+        player.getDuration().then(d => {
+          duration = Number(d) || 0;
+          return player.getCurrentTime();
+        }).then(seconds => {
+          updateVimeoHud(holder, seconds, duration);
+        }).catch(()=>{});
       });
 
       return hud;
     }
 
-    function toggleVimeoPlayer(player){
+    function toggleVimeoPlayer(player, holder){
       player.getPaused().then(paused => {
         if(paused){
-          player.play().catch(()=>{});
+          setVimeoUiState(holder, true, false);
+          player.play().then(() => {
+            setVimeoUiState(holder, true, false);
+            startVimeoProgressLoop(player, holder);
+          }).catch(() => {
+            setVimeoUiState(holder, false, true);
+          });
         } else {
-          player.pause().catch(()=>{});
+          setVimeoUiState(holder, false, true);
+          player.pause().then(() => {
+            setVimeoUiState(holder, false, true);
+            stopVimeoProgressLoop(holder);
+          }).catch(() => {
+            setVimeoUiState(holder, true, false);
+          });
         }
       }).catch(() => {
-        player.play().catch(()=>{});
+        setVimeoUiState(holder, true, false);
+        player.play().then(() => startVimeoProgressLoop(player, holder)).catch(()=>{});
       });
     }
 
@@ -5657,22 +5784,27 @@
         wireVimeoControls(player, thumb);
 
         player.on("play", () => {
-          thumb.classList.add("vimeoPlaying");
+          setVimeoUiState(thumb, true, false);
+          startVimeoProgressLoop(player, thumb);
         });
 
         player.on("pause", () => {
-          thumb.classList.remove("vimeoPlaying");
+          setVimeoUiState(thumb, false, true);
+          stopVimeoProgressLoop(thumb);
+          player.getCurrentTime().then(seconds => player.getDuration().then(d => updateVimeoHud(thumb, seconds, d))).catch(()=>{});
         });
 
         player.on("ended", () => {
-          thumb.classList.remove("vimeoPlaying");
+          setVimeoUiState(thumb, false, false);
+          stopVimeoProgressLoop(thumb);
           player.setCurrentTime(0).catch(()=>{});
+          updateVimeoHud(thumb, 0, 0);
         });
 
         layer.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-          toggleVimeoPlayer(player);
+          toggleVimeoPlayer(player, thumb);
         });
       });
     }
@@ -5706,7 +5838,7 @@
         player.pause().catch(()=>{});
       });
 
-      document.querySelectorAll(".thumb.vimeoPlaying").forEach(el => el.classList.remove("vimeoPlaying"));
+      document.querySelectorAll(".thumb.vimeoPlaying, .thumb.vimeoPausedAfterPlay").forEach(el => { el.classList.remove("vimeoPlaying"); el.classList.add("vimeoPausedAfterPlay"); stopVimeoProgressLoop(el); });
     }
 
     setVimeoUrls();
@@ -5738,7 +5870,7 @@
       }
 
       if(modalMedia){
-        modalMedia.classList.remove("vimeoPlaying");
+        modalMedia.classList.remove("vimeoPlaying", "vimeoPausedAfterPlay");
         const oldLayer = modalMedia.querySelector(".vimeoPlayLayer");
         if(oldLayer) oldLayer.remove();
         const oldHud = modalMedia.querySelector(".vimeoHud");
@@ -5771,23 +5903,28 @@
       });
 
       modalVimeoPlayer.on("play", () => {
-        modalMedia.classList.add("vimeoPlaying");
+        setVimeoUiState(modalMedia, true, false);
+        startVimeoProgressLoop(modalVimeoPlayer, modalMedia);
         showLoader(false);
       });
 
       modalVimeoPlayer.on("pause", () => {
-        modalMedia.classList.remove("vimeoPlaying");
+        setVimeoUiState(modalMedia, false, true);
+        stopVimeoProgressLoop(modalMedia);
+        modalVimeoPlayer.getCurrentTime().then(seconds => modalVimeoPlayer.getDuration().then(d => updateVimeoHud(modalMedia, seconds, d))).catch(()=>{});
       });
 
       modalVimeoPlayer.on("ended", () => {
-        modalMedia.classList.remove("vimeoPlaying");
+        setVimeoUiState(modalMedia, false, false);
+        stopVimeoProgressLoop(modalMedia);
         modalVimeoPlayer.setCurrentTime(0).catch(()=>{});
+        updateVimeoHud(modalMedia, 0, 0);
       });
 
       layer.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
-        toggleVimeoPlayer(modalVimeoPlayer);
+        toggleVimeoPlayer(modalVimeoPlayer, modalMedia);
       });
     }
 
