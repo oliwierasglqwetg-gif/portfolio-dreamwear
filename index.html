@@ -3197,6 +3197,270 @@
       .moreLaunchCount{ display:none; }
     }
 
+
+
+    /* === OWLEX VISUALS: więcej realizacji tylko Animacje 2D === */
+    .motionOnlyHero{
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      border-color:rgba(168,85,247,.30);
+      background:
+        radial-gradient(620px 230px at 20% 0%, rgba(168,85,247,.28), transparent 66%),
+        radial-gradient(620px 230px at 80% 0%, rgba(236,72,153,.20), transparent 66%),
+        radial-gradient(520px 220px at 50% 100%, rgba(52,211,153,.13), transparent 70%),
+        rgba(255,255,255,.052);
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.62),
+        0 0 80px rgba(168,85,247,.13),
+        inset 0 0 0 1px rgba(255,255,255,.04);
+    }
+
+    .motionOnlyHero::before,
+    .motionOnlyHero::after{
+      content:"";
+      position:absolute;
+      pointer-events:none;
+    }
+
+    .motionOnlyHero::before{
+      inset:-40%;
+      background:linear-gradient(115deg, transparent 35%, rgba(255,255,255,.16) 47%, transparent 58%);
+      transform:translateX(-55%) rotate(5deg);
+      animation: owlexLightSweep 5.8s ease-in-out infinite;
+    }
+
+    .motionOnlyHero::after{
+      left:12%; right:12%; bottom:0;
+      height:3px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, rgba(168,85,247,.95), rgba(236,72,153,.90), rgba(52,211,153,.75), transparent);
+      box-shadow:0 0 30px rgba(168,85,247,.24), 0 0 34px rgba(236,72,153,.16);
+    }
+
+    .motionOnlyHero h2{
+      font-family: ui-rounded, "Trebuchet MS", var(--font);
+      font-weight:950;
+      letter-spacing:-1.6px;
+      background:linear-gradient(90deg, rgba(255,255,255,.98), rgba(216,180,254,.98), rgba(244,114,182,.94), rgba(52,211,153,.88));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      filter:drop-shadow(0 0 28px rgba(168,85,247,.18));
+    }
+
+    .motionOnlyHero h2 span{
+      color:rgba(244,114,182,.98);
+      -webkit-text-fill-color:rgba(244,114,182,.98);
+      text-shadow:0 0 32px rgba(244,114,182,.30);
+    }
+
+    .motionOnlyCat{
+      width:min(1060px, 100%);
+      padding:22px;
+      border-radius:34px;
+      border:1px solid rgba(168,85,247,.22);
+      background:
+        radial-gradient(900px 360px at 50% 0%, rgba(168,85,247,.10), transparent 66%),
+        radial-gradient(700px 300px at 12% 30%, rgba(236,72,153,.07), transparent 70%),
+        rgba(255,255,255,.026);
+      box-shadow:0 28px 90px rgba(0,0,0,.48), inset 0 0 0 1px rgba(255,255,255,.025);
+    }
+
+    .motionEyebrow{
+      width:fit-content;
+      margin:0 auto 11px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid rgba(168,85,247,.28);
+      background:rgba(168,85,247,.09);
+      color:rgba(216,180,254,.96);
+      font-family:var(--mono);
+      font-size:10px;
+      font-weight:950;
+      letter-spacing:1.2px;
+      box-shadow:0 0 28px rgba(168,85,247,.13);
+    }
+
+    .motionHead h3{
+      font-family: ui-rounded, "Trebuchet MS", var(--font);
+      font-size:clamp(38px, 6vw, 72px);
+      letter-spacing:-1.8px;
+      background:linear-gradient(90deg, rgba(255,255,255,.98), rgba(216,180,254,.96), rgba(244,114,182,.90));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      text-shadow:none;
+    }
+
+    .motionHead h3::after{
+      width:min(560px, 78%);
+      height:5px;
+      margin-top:18px;
+      border-radius:999px;
+      background:linear-gradient(90deg, transparent, rgba(168,85,247,.95), rgba(244,114,182,.86), transparent);
+      box-shadow:0 0 32px rgba(168,85,247,.22), 0 0 30px rgba(244,114,182,.14);
+    }
+
+    .motionOnlyGrid{
+      grid-template-columns:repeat(3, minmax(0, 1fr)) !important;
+      gap:22px !important;
+      align-items:start;
+    }
+
+    #wiecej-realizacji .moreMotionCard{
+      position:relative;
+      overflow:hidden;
+      border-radius:26px !important;
+      border:1px solid rgba(168,85,247,.26) !important;
+      background:
+        radial-gradient(380px 180px at 20% 0%, rgba(168,85,247,.15), transparent 68%),
+        radial-gradient(280px 140px at 100% 0%, rgba(236,72,153,.10), transparent 68%),
+        rgba(4,5,12,.82) !important;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.58),
+        0 0 44px rgba(168,85,247,.10),
+        inset 0 0 0 1px rgba(255,255,255,.035) !important;
+      padding:12px !important;
+      transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    #wiecej-realizacji .moreMotionCard::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      border-radius:inherit;
+      padding:2px;
+      background:conic-gradient(from 180deg, rgba(168,85,247,0), rgba(168,85,247,.72), rgba(244,114,182,.58), rgba(52,211,153,.42), rgba(168,85,247,0));
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+      mask-composite:exclude;
+      opacity:.62;
+      pointer-events:none;
+      animation: moreBorderSpin 7.5s linear infinite;
+    }
+
+    #wiecej-realizacji .moreMotionCard::after{
+      content:"";
+      position:absolute;
+      left:-35%; top:-70%;
+      width:42%; height:230%;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+      transform:rotate(18deg);
+      opacity:.0;
+      pointer-events:none;
+    }
+
+    #wiecej-realizacji .moreMotionCard:hover{
+      transform:translateY(-6px) scale(1.012);
+      border-color:rgba(244,114,182,.38) !important;
+      box-shadow:
+        0 38px 100px rgba(0,0,0,.66),
+        0 0 72px rgba(168,85,247,.18),
+        0 0 42px rgba(244,114,182,.12),
+        inset 0 0 0 1px rgba(255,255,255,.045) !important;
+    }
+
+    #wiecej-realizacji .moreMotionCard:hover::after{
+      opacity:1;
+      animation: cardLightSweep .9s ease forwards;
+    }
+
+    #wiecej-realizacji .thumb{
+      height:auto !important;
+      min-height:0 !important;
+      border-radius:18px !important;
+      border:1px solid rgba(255,255,255,.12);
+      background:#000 !important;
+      overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.035), 0 18px 44px rgba(0,0,0,.42);
+    }
+
+    #wiecej-realizacji .projectVertical .thumb{ aspect-ratio:9 / 16 !important; }
+    #wiecej-realizacji .projectWide{ grid-column:span 2; }
+    #wiecej-realizacji .projectWide .thumb{ aspect-ratio:16 / 9 !important; }
+
+    #wiecej-realizacji .thumbVideo,
+    #wiecej-realizacji .vimeoThumb{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      border:0;
+      display:block;
+      background:#000;
+    }
+
+    .formatBadge{
+      position:absolute;
+      right:10px;
+      top:10px;
+      z-index:9;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(7,7,13,.64);
+      backdrop-filter:blur(12px);
+      color:rgba(255,255,255,.86);
+      font-family:var(--mono);
+      font-size:10px;
+      font-weight:950;
+      box-shadow:0 0 24px rgba(168,85,247,.15);
+      pointer-events:none;
+    }
+
+    #wiecej-realizacji .meta h4{
+      font-size:15px !important;
+      color:rgba(255,255,255,.96) !important;
+      text-shadow:0 0 20px rgba(168,85,247,.16);
+    }
+
+    #wiecej-realizacji .meta p{
+      font-size:12px !important;
+      color:rgba(255,255,255,.66) !important;
+    }
+
+    #wiecej-realizacji .tags{
+      display:flex !important;
+      flex-wrap:wrap;
+      gap:7px;
+      margin-top:10px;
+    }
+
+    #wiecej-realizacji .tag{
+      border-color:rgba(168,85,247,.22);
+      background:rgba(168,85,247,.075);
+      color:rgba(255,255,255,.78);
+      box-shadow:0 0 18px rgba(168,85,247,.07);
+    }
+
+    @keyframes owlexLightSweep{
+      0%, 58%{ transform:translateX(-65%) rotate(5deg); opacity:0; }
+      70%{ opacity:1; }
+      100%{ transform:translateX(65%) rotate(5deg); opacity:0; }
+    }
+
+    @keyframes cardLightSweep{
+      from{ left:-40%; }
+      to{ left:120%; }
+    }
+
+    @media (max-width: 760px){
+      .motionOnlyCat{ padding:14px; border-radius:26px; }
+      .motionOnlyGrid{ grid-template-columns:repeat(2, minmax(0, 1fr)) !important; gap:14px !important; }
+      #wiecej-realizacji .projectWide{ grid-column:1 / -1; }
+      #wiecej-realizacji .moreMotionCard{ border-radius:20px !important; padding:9px !important; }
+      .motionHead h3{ font-size:42px; }
+    }
+
+    @media (max-width: 430px){
+      .motionOnlyGrid{ grid-template-columns:1fr !important; }
+      #wiecej-realizacji .moreMotionCard{ width:100% !important; max-width:330px; margin:0 auto; }
+      #wiecej-realizacji .projectWide{ max-width:100%; }
+      #wiecej-realizacji .projectWide .thumb{ aspect-ratio:16 / 9 !important; }
+    }
+
     @media (max-width: 1460px){
       .sideNav{
         display:none;
@@ -5002,20 +5266,20 @@
               <span class="moreLaunchGlow" aria-hidden="true"></span>
               <span class="moreLaunchIcon">✦</span>
               <span class="moreLaunchText">
-                <b>Zobacz więcej realizacji</b>
-                <small>pełne portfolio, więcej stylów i dodatkowe przykłady</small>
+                <b>Zobacz animacje 2D</b>
+                <small>motion design, efekty, napisy i wizualne przykłady</small>
               </span>
-              <span class="moreLaunchCount">10+</span>
+              <span class="moreLaunchCount">2D</span>
             </a>
           </div>
         </div>
       </section>
 
-            <section class="section morePage" id="wiecej-realizacji" aria-label="Więcej realizacji">
+            <section class="section morePage" id="wiecej-realizacji" aria-label="Animacje 2D">
         <div class="morePageTopbar reveal">
           <a class="morePageBrand" href="#portfolio" data-back-home aria-label="Wróć do strony głównej">
-            <span class="morePageLogo"><img src="assets/Favicon.png" alt="Lumocut" /></span>
-            <span><b>Lumocut</b><small>więcej realizacji</small></span>
+            <span class="morePageLogo"><img src="assets/Favicon.png" alt="Owlex Visuals" /></span>
+            <span><b>Owlex Visuals</b><small>portfolio 2D</small></span>
           </a>
 
           <a class="moreBackBtn" href="#portfolio" data-back-home>Wróć</a>
@@ -5023,130 +5287,105 @@
           <a class="moreIgBtn" href="https://www.instagram.com/oliwierimianowski/" target="_blank" rel="noopener">Napisz na IG</a>
         </div>
 
-        <div class="morePageHero reveal">
-          <div class="moreHeroBadge">✦ Portfolio Lumocut</div>
-          <h2>Więcej realizacji</h2>
-          <p>Zobacz dodatkowe przykłady pracy Lumocut: talking head, krótkie CTA i animacje 2D.</p>
+        <div class="morePageHero reveal motionOnlyHero">
+          <div class="moreHeroBadge">✦ OWLEX VISUALS / MOTION DESIGN</div>
+          <h2>Animacje <span>2D</span></h2>
+          <p>Tutaj są same przykłady animacji 2D: motion design, grafiki, napisy, plansze i elementy wizualne pod social media.</p>
         </div>
 
-        <div class="moreCategory reveal talkingHeadCat">
-          <div class="moreCategoryHead">
-            <h3>Talking Head</h3>
-            <p>Przykłady montażu na prawdziwych materiałach: rozmowa, tempo, napisy i rytm rolki.</p>
-          </div>
-          <div class="moreGrid morePageGrid">
-              <article class="project reveal" data-title="Rolka #4" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="Rolka #4">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_4"></iframe>
-                </div>
-                <div class="meta">
-                  <h4>Montaż Talking Head</h4>
-                  <p>styl Lumocut</p>
-                  <div class="tags">
-                    <span class="tag">Reels</span><span class="tag">Tempo</span><span class="tag">Napisy</span>
-                  </div>
-                </div>
-              </article>
-              <article class="project reveal" data-title="OD #1" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="OD #1">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_1"></iframe>
-                </div>
-                <div class="meta">
-                  <h4>Montaż Talking Head</h4>
-                  <p>styl Lumocut + napisy</p>
-                  <div class="tags">
-                    <span class="tag">Hook</span><span class="tag">Beat</span><span class="tag">Clean</span>
-                  </div>
-                </div>
-              </article>
-          </div>
-        </div>
-
-        <div class="moreCategory reveal ctaCat">
-          <div class="moreCategoryHead">
-            <h3>Wezwanie do działania (CTA)</h3>
-            <p>Krótkie momenty, które prowadzą widza do konkretnej akcji: komentarz albo obserwacja.</p>
-          </div>
-          <div class="moreGrid morePageGrid">
-              <article class="project reveal" data-title="OD #2" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="OD #2">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_2"></iframe>
-                </div>
-                <div class="meta">
-                  <h4>Krótki CTA</h4>
-                  <p>komentarz albo obserwacja</p>
-                  <div class="tags">
-                    <span class="tag">TikTok</span><span class="tag">Tempo</span><span class="tag">Napisy</span>
-                  </div>
-                </div>
-              </article>
-              <article class="project reveal" data-title="OD #3" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="OD #3">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_3"></iframe>
-                </div>
-                <div class="meta">
-                  <h4>Krótki CTA</h4>
-                  <p>dynamiczne wezwanie</p>
-                  <div class="tags">
-                    <span class="tag">Efekty</span><span class="tag">Vibe</span><span class="tag">SFX</span>
-                  </div>
-                </div>
-              </article>
-          </div>
-        </div>
-
-        <div class="moreCategory reveal motionCat">
-          <div class="moreCategoryHead">
+        <div class="moreCategory reveal motionCat motionOnlyCat">
+          <div class="moreCategoryHead motionHead">
+            <div class="motionEyebrow">WYBRANE PRACE</div>
             <h3>Animacje 2D</h3>
-            <p>Animacje, napisy i elementy graficzne dopasowane do klimatu rolki.</p>
+            <p>Każdy materiał zostaje w swoim formacie. Pionowe filmy są 9:16, a szerokie materiały 16:9 mają poziome karty.</p>
           </div>
-          <div class="moreGrid morePageGrid">
-              <article class="project reveal" data-title="OD #4" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="OD #4">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="OD_4"></iframe>
+          <div class="moreGrid morePageGrid motionOnlyGrid">
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="2D social motion" data-video="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="2D social motion">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983306?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="2D social motion"></iframe>
+                  <span class="formatBadge">9:16</span>
                 </div>
                 <div class="meta">
-                  <h4>Motion design</h4>
-                  <p>animacja</p>
-                  <div class="tags">
-                    <span class="tag">Retention</span><span class="tag">Hook</span><span class="tag">Tempo</span>
-                  </div>
+                  <h4>2D social motion</h4>
+                  <p>Animowane elementy do krótkiej rolki, szybki rytm i czytelny przekaz.</p>
+                  <div class="tags"><span class="tag">Motion</span><span class="tag">Napisy</span><span class="tag">Social</span></div>
                 </div>
               </article>
-              <article class="project reveal" data-title="Video #1" data-video="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="Video #1">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_1"></iframe>
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Animowany hook" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="Animowany hook">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Animowany hook"></iframe>
+                  <span class="formatBadge">9:16</span>
                 </div>
                 <div class="meta">
-                  <h4>Motion design</h4>
-                  <p>plansza / animacja</p>
-                  <div class="tags">
-                    <span class="tag">16:9</span><span class="tag">Portfolio</span><span class="tag">Montaż</span>
-                  </div>
+                  <h4>Animowany hook</h4>
+                  <p>Wejście pod uwagę widza: mocny start, ruch i szybkie akcenty.</p>
+                  <div class="tags"><span class="tag">Hook</span><span class="tag">Reels</span><span class="tag">2D</span></div>
                 </div>
               </article>
-              <article class="project reveal" data-title="Video #2" data-video="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="Video #2">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_2"></iframe>
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="CTA w animacji 2D" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="CTA w animacji 2D">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="CTA w animacji 2D"></iframe>
+                  <span class="formatBadge">9:16</span>
                 </div>
                 <div class="meta">
-                  <h4>Motion design</h4>
-                  <p>grafika 2D</p>
-                  <div class="tags">
-                    <span class="tag">Reels</span><span class="tag">Tempo</span><span class="tag">SFX</span>
-                  </div>
+                  <h4>CTA w animacji 2D</h4>
+                  <p>Krótka animacja prowadząca widza do konkretnej akcji.</p>
+                  <div class="tags"><span class="tag">CTA</span><span class="tag">Tempo</span><span class="tag">Efekt</span></div>
                 </div>
               </article>
-              <article class="project reveal" data-title="Video #3" data-video="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
-                <div class="thumb" aria-label="Video #3">
-                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Video_3"></iframe>
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Dynamiczny visual" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="Dynamiczny visual">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Dynamiczny visual"></iframe>
+                  <span class="formatBadge">9:16</span>
+                </div>
+                <div class="meta">
+                  <h4>Dynamiczny visual</h4>
+                  <p>Ruch, SFX i proste elementy graficzne pod klimat materiału.</p>
+                  <div class="tags"><span class="tag">SFX</span><span class="tag">Vibe</span><span class="tag">Motion</span></div>
+                </div>
+              </article>
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Motion design" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="Motion design">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Motion design"></iframe>
+                  <span class="formatBadge">9:16</span>
                 </div>
                 <div class="meta">
                   <h4>Motion design</h4>
-                  <p>animacja 2D</p>
-                  <div class="tags">
-                    <span class="tag">Napisy</span><span class="tag">Cięcia</span><span class="tag">Vibe</span>
-                  </div>
+                  <p>Animacja 2D z naciskiem na czytelność, rytm i retencję.</p>
+                  <div class="tags"><span class="tag">Retention</span><span class="tag">2D</span><span class="tag">Hook</span></div>
+                </div>
+              </article>
+              <article class="project reveal moreMotionCard projectWide" data-format="16:9" data-title="Plansza 2D szeroka" data-video="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="Plansza 2D szeroka">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983056?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Plansza 2D szeroka"></iframe>
+                  <span class="formatBadge">16:9</span>
+                </div>
+                <div class="meta">
+                  <h4>Plansza 2D szeroka</h4>
+                  <p>Szeroki format 16:9, dlatego karta jest pozioma, żeby nie wciskać filmu na siłę w rolkę.</p>
+                  <div class="tags"><span class="tag">16:9</span><span class="tag">Plansza</span><span class="tag">Portfolio</span></div>
+                </div>
+              </article>
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Grafika 2D do rolki" data-video="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="Grafika 2D do rolki">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983067?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Grafika 2D do rolki"></iframe>
+                  <span class="formatBadge">9:16</span>
+                </div>
+                <div class="meta">
+                  <h4>Grafika 2D do rolki</h4>
+                  <p>Pionowy format pod social media, animowane elementy i lekki motion.</p>
+                  <div class="tags"><span class="tag">Reels</span><span class="tag">Grafika</span><span class="tag">SFX</span></div>
+                </div>
+              </article>
+              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Animowane napisy" data-video="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+                <div class="thumb" aria-label="Animowane napisy">
+                  <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195983125?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Animowane napisy"></iframe>
+                  <span class="formatBadge">9:16</span>
+                </div>
+                <div class="meta">
+                  <h4>Animowane napisy</h4>
+                  <p>Napisy i drobne efekty graficzne pod tempo filmu.</p>
+                  <div class="tags"><span class="tag">Napisy</span><span class="tag">Cięcia</span><span class="tag">Vibe</span></div>
                 </div>
               </article>
           </div>
@@ -6217,7 +6456,7 @@
     function attachInlineVimeoPlayers(){
       if(!window.Vimeo || !window.Vimeo.Player) return;
 
-      document.querySelectorAll("#portfolio .thumb").forEach(thumb => {
+      document.querySelectorAll("#portfolio .thumb, #wiecej-realizacji .thumb").forEach(thumb => {
         const frame = thumb.querySelector('iframe[src*="player.vimeo.com/video/"]');
         if(!frame || thumb.querySelector(".vimeoPlayLayer")) return;
 
@@ -6480,7 +6719,7 @@
     function setMoreRoute(){
       const isMore = window.location.hash === "#wiecej-realizacji";
       document.body.classList.toggle("moreRoute", isMore);
-      document.title = isMore ? "Więcej realizacji • Lumocut" : baseTitle;
+      document.title = isMore ? "Animacje 2D • Owlex Visuals" : baseTitle;
 
       requestAnimationFrame(() => {
         if(isMore){
