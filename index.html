@@ -3199,7 +3199,7 @@
 
 
 
-    /* === OWLEX VISUALS: więcej realizacji tylko Animacje 2D === */
+    /* === OWLLX VISUALS: więcej realizacji tylko Animacje 2D === */
     .motionOnlyHero{
       position:relative;
       overflow:hidden;
@@ -3227,7 +3227,7 @@
       inset:-40%;
       background:linear-gradient(115deg, transparent 35%, rgba(255,255,255,.16) 47%, transparent 58%);
       transform:translateX(-55%) rotate(5deg);
-      animation: owlexLightSweep 5.8s ease-in-out infinite;
+      animation: owllxLightSweep 5.8s ease-in-out infinite;
     }
 
     .motionOnlyHero::after{
@@ -3435,7 +3435,7 @@
       box-shadow:0 0 18px rgba(168,85,247,.07);
     }
 
-    @keyframes owlexLightSweep{
+    @keyframes owllxLightSweep{
       0%, 58%{ transform:translateX(-65%) rotate(5deg); opacity:0; }
       70%{ opacity:1; }
       100%{ transform:translateX(65%) rotate(5deg); opacity:0; }
@@ -5029,7 +5029,152 @@
       }
     }
 
-</style>
+
+
+    /* === FINAL: OWLLX Visuals colors + 2D layout cleanup === */
+    #wiecej-realizacji{
+      --owllx-pink: 251,113,133;
+      --owllx-green: 52,211,153;
+      --owllx-cream: 248,239,219;
+      --owllx-dark: 5,6,10;
+    }
+
+    #wiecej-realizacji .morePageHero.motionOnlyHero,
+    #wiecej-realizacji .motionOnlyCat{
+      border-color: rgba(var(--owllx-pink), .22) !important;
+      background:
+        radial-gradient(720px 260px at 16% 0%, rgba(var(--owllx-pink), .16), transparent 66%),
+        radial-gradient(720px 260px at 84% 0%, rgba(var(--owllx-green), .13), transparent 66%),
+        radial-gradient(520px 230px at 50% 100%, rgba(251,191,36,.07), transparent 70%),
+        rgba(255,255,255,.045) !important;
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.62),
+        0 0 80px rgba(var(--owllx-pink), .09),
+        0 0 70px rgba(var(--owllx-green), .07),
+        inset 0 0 0 1px rgba(255,255,255,.04) !important;
+    }
+
+    #wiecej-realizacji .motionOnlyHero::after,
+    #wiecej-realizacji .motionHead h3::after{
+      background: linear-gradient(90deg, transparent, rgba(var(--owllx-pink), .92), rgba(var(--owllx-green), .80), transparent) !important;
+      box-shadow: 0 0 32px rgba(var(--owllx-pink), .18), 0 0 34px rgba(var(--owllx-green), .12) !important;
+    }
+
+    #wiecej-realizacji .moreHeroBadge,
+    #wiecej-realizacji .motionEyebrow{
+      border-color: rgba(var(--owllx-pink), .22) !important;
+      background:
+        radial-gradient(160px 70px at 20% 0%, rgba(var(--owllx-pink), .16), transparent 70%),
+        radial-gradient(160px 70px at 80% 0%, rgba(var(--owllx-green), .12), transparent 70%),
+        rgba(0,0,0,.28) !important;
+      color: rgba(var(--owllx-cream), .96) !important;
+      box-shadow: 0 0 28px rgba(var(--owllx-pink), .10), 0 0 24px rgba(var(--owllx-green), .07) !important;
+    }
+
+    #wiecej-realizacji .motionOnlyHero h2,
+    #wiecej-realizacji .motionHead h3{
+      font-family: Impact, Haettenschweiler, "Arial Black", "Trebuchet MS", var(--font) !important;
+      text-transform: uppercase;
+      font-weight: 950 !important;
+      letter-spacing: .5px !important;
+      line-height: .88 !important;
+      color: rgb(var(--owllx-cream)) !important;
+      -webkit-text-fill-color: rgb(var(--owllx-cream)) !important;
+      background: none !important;
+      text-shadow:
+        0 3px 0 rgba(0,0,0,.24),
+        0 0 30px rgba(var(--owllx-pink), .14),
+        0 0 34px rgba(var(--owllx-green), .10) !important;
+      filter: none !important;
+    }
+
+    #wiecej-realizacji .motionOnlyHero h2 span{
+      display:inline-block;
+      padding: .02em .16em .06em;
+      margin-left:.08em;
+      border-radius: .20em;
+      color: rgb(var(--owllx-cream)) !important;
+      -webkit-text-fill-color: rgb(var(--owllx-cream)) !important;
+      background: linear-gradient(135deg, rgba(var(--owllx-pink), .78), rgba(var(--owllx-green), .54)) !important;
+      box-shadow: 0 0 28px rgba(var(--owllx-pink), .18), 0 0 30px rgba(var(--owllx-green), .12) !important;
+      text-shadow: 0 2px 0 rgba(0,0,0,.22) !important;
+    }
+
+    #wiecej-realizacji .motionOnlyGrid{
+      display:grid !important;
+      grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+      grid-auto-flow: dense !important;
+      gap: 20px !important;
+      align-items:start !important;
+    }
+
+    #wiecej-realizacji .moreMotionCard{
+      border-color: rgba(var(--owllx-pink), .24) !important;
+      background:
+        radial-gradient(380px 180px at 16% 0%, rgba(var(--owllx-pink), .12), transparent 68%),
+        radial-gradient(300px 150px at 100% 0%, rgba(var(--owllx-green), .10), transparent 68%),
+        rgba(var(--owllx-dark), .84) !important;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.58),
+        0 0 44px rgba(var(--owllx-pink), .08),
+        0 0 36px rgba(var(--owllx-green), .055),
+        inset 0 0 0 1px rgba(255,255,255,.035) !important;
+    }
+
+    #wiecej-realizacji .moreMotionCard::before{
+      background: conic-gradient(from 180deg, rgba(var(--owllx-pink),0), rgba(var(--owllx-pink),.72), rgba(var(--owllx-green),.56), rgba(251,191,36,.30), rgba(var(--owllx-pink),0)) !important;
+      opacity:.72 !important;
+    }
+
+    #wiecej-realizacji .moreMotionCard:hover{
+      border-color: rgba(var(--owllx-green), .36) !important;
+      box-shadow:
+        0 38px 100px rgba(0,0,0,.66),
+        0 0 72px rgba(var(--owllx-pink), .15),
+        0 0 54px rgba(var(--owllx-green), .12),
+        inset 0 0 0 1px rgba(255,255,255,.045) !important;
+    }
+
+    #wiecej-realizacji .formatBadge,
+    #wiecej-realizacji .tag{
+      border-color: rgba(var(--owllx-pink), .18) !important;
+      background: linear-gradient(135deg, rgba(var(--owllx-pink), .14), rgba(var(--owllx-green), .08)) !important;
+      color: rgba(var(--owllx-cream), .86) !important;
+      box-shadow: 0 0 18px rgba(var(--owllx-pink), .07), 0 0 16px rgba(var(--owllx-green), .045) !important;
+    }
+
+    #wiecej-realizacji .meta h4{
+      color: rgba(var(--owllx-cream), .98) !important;
+      text-shadow: 0 0 20px rgba(var(--owllx-pink), .12), 0 0 18px rgba(var(--owllx-green), .08) !important;
+    }
+
+    #wiecej-realizacji .projectWide{
+      grid-column: span 2 !important;
+    }
+
+    #wiecej-realizacji .projectWide .thumb{
+      aspect-ratio: 16 / 9 !important;
+    }
+
+    #wiecej-realizacji .projectVertical .thumb{
+      aspect-ratio: 9 / 16 !important;
+    }
+
+    #wiecej-realizacji .moreIgBtn{
+      background: linear-gradient(135deg, rgba(var(--owllx-pink), .86), rgba(var(--owllx-green), .62)) !important;
+      border-color: rgba(255,255,255,.12) !important;
+      box-shadow: 0 16px 40px rgba(var(--owllx-pink), .14), 0 16px 38px rgba(var(--owllx-green), .09) !important;
+    }
+
+    @media (max-width: 760px){
+      #wiecej-realizacji .motionOnlyGrid{ grid-template-columns: 1fr !important; gap: 16px !important; }
+      #wiecej-realizacji .projectWide{ grid-column: 1 / -1 !important; }
+      #wiecej-realizacji .projectVertical{ max-width: 360px; margin-inline:auto; }
+      #wiecej-realizacji .motionOnlyHero h2{ font-size: clamp(44px, 14vw, 74px) !important; }
+      #wiecej-realizacji .motionHead h3{ font-size: clamp(42px, 13vw, 66px) !important; }
+    }
+
+  </style>
 </head>
 
 <body>
@@ -5278,8 +5423,8 @@
             <section class="section morePage" id="wiecej-realizacji" aria-label="Animacje 2D">
         <div class="morePageTopbar reveal">
           <a class="morePageBrand" href="#portfolio" data-back-home aria-label="Wróć do strony głównej">
-            <span class="morePageLogo"><img src="assets/Favicon.png" alt="Owlex Visuals" /></span>
-            <span><b>Owlex Visuals</b><small>portfolio 2D</small></span>
+            <span class="morePageLogo"><img src="assets/Favicon.png" alt="OWLLX Visuals" /></span>
+            <span><b>OWLLX Visuals</b><small>portfolio 2D</small></span>
           </a>
 
           <a class="moreBackBtn" href="#portfolio" data-back-home>Wróć</a>
@@ -5288,7 +5433,7 @@
         </div>
 
         <div class="morePageHero reveal motionOnlyHero">
-          <div class="moreHeroBadge">✦ OWLEX VISUALS / MOTION DESIGN</div>
+          <div class="moreHeroBadge">✦ OWLLX VISUALS / MOTION DESIGN</div>
           <h2>Animacje <span>2D</span></h2>
           <p>Tutaj są same przykłady animacji 2D: motion design, grafiki, napisy, plansze i elementy wizualne pod social media.</p>
         </div>
@@ -5311,10 +5456,10 @@
                   <div class="tags"><span class="tag">Motion</span><span class="tag">Napisy</span><span class="tag">Social</span></div>
                 </div>
               </article>
-              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Animowany hook" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+              <article class="project reveal moreMotionCard projectWide" data-format="16:9" data-title="Animowany hook" data-video="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Animowany hook">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982863?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Animowany hook"></iframe>
-                  <span class="formatBadge">9:16</span>
+                  <span class="formatBadge">16:9</span>
                 </div>
                 <div class="meta">
                   <h4>Animowany hook</h4>
@@ -5322,10 +5467,10 @@
                   <div class="tags"><span class="tag">Hook</span><span class="tag">Reels</span><span class="tag">2D</span></div>
                 </div>
               </article>
-              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="CTA w animacji 2D" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+              <article class="project reveal moreMotionCard projectWide" data-format="16:9" data-title="CTA w animacji 2D" data-video="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="CTA w animacji 2D">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982862?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="CTA w animacji 2D"></iframe>
-                  <span class="formatBadge">9:16</span>
+                  <span class="formatBadge">16:9</span>
                 </div>
                 <div class="meta">
                   <h4>CTA w animacji 2D</h4>
@@ -5333,10 +5478,10 @@
                   <div class="tags"><span class="tag">CTA</span><span class="tag">Tempo</span><span class="tag">Efekt</span></div>
                 </div>
               </article>
-              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Dynamiczny visual" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+              <article class="project reveal moreMotionCard projectWide" data-format="16:9" data-title="Dynamiczny visual" data-video="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Dynamiczny visual">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982915?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Dynamiczny visual"></iframe>
-                  <span class="formatBadge">9:16</span>
+                  <span class="formatBadge">16:9</span>
                 </div>
                 <div class="meta">
                   <h4>Dynamiczny visual</h4>
@@ -5344,10 +5489,10 @@
                   <div class="tags"><span class="tag">SFX</span><span class="tag">Vibe</span><span class="tag">Motion</span></div>
                 </div>
               </article>
-              <article class="project reveal moreMotionCard projectVertical" data-format="9:16" data-title="Motion design" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
+              <article class="project reveal moreMotionCard projectWide" data-format="16:9" data-title="Motion design" data-video="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0">
                 <div class="thumb" aria-label="Motion design">
                   <iframe class="thumbVideo vimeoThumb" src="https://player.vimeo.com/video/1195982925?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;title=0&amp;byline=0&amp;portrait=0&amp;loop=1&amp;dnt=1&amp;playsinline=1&amp;controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="Motion design"></iframe>
-                  <span class="formatBadge">9:16</span>
+                  <span class="formatBadge">16:9</span>
                 </div>
                 <div class="meta">
                   <h4>Motion design</h4>
@@ -6719,7 +6864,7 @@
     function setMoreRoute(){
       const isMore = window.location.hash === "#wiecej-realizacji";
       document.body.classList.toggle("moreRoute", isMore);
-      document.title = isMore ? "Animacje 2D • Owlex Visuals" : baseTitle;
+      document.title = isMore ? "Animacje 2D • OWLLX Visuals" : baseTitle;
 
       requestAnimationFrame(() => {
         if(isMore){
