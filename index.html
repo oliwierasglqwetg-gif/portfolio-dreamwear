@@ -4667,7 +4667,7 @@
       bottom: 12px;
       z-index: 8;
       display:grid;
-      grid-template-columns: auto auto 1fr auto auto;
+      grid-template-columns: auto auto 1fr auto auto auto;
       align-items:center;
       gap: 9px;
       padding: 8px 10px;
@@ -4693,7 +4693,8 @@
       transform: translateY(2px);
     }
 
-    .vimeoToggleBtn{
+    .vimeoToggleBtn,
+    .vimeoSoundBtn{
       width: 28px;
       height: 28px;
       border: 1px solid rgba(255,255,255,.16);
@@ -4710,7 +4711,8 @@
       transition: .16s ease;
     }
 
-    .vimeoToggleBtn:hover{
+    .vimeoToggleBtn:hover,
+    .vimeoSoundBtn:hover{
       transform: scale(1.05);
       background: rgba(255,255,255,.12);
       border-color: rgba(255,255,255,.24);
@@ -4735,7 +4737,8 @@
     }
 
     .vimeoVol,
-    .vimeoQuality{
+    .vimeoQuality,
+    .vimeoSoundBtn{
       height: 28px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
@@ -4750,6 +4753,16 @@
     .vimeoVol{
       width: 54px;
       accent-color: rgba(255,255,255,.86);
+    }
+
+    .vimeoSoundBtn{
+      width: 28px;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1;
     }
 
     .vimeoQuality{
@@ -4768,13 +4781,14 @@
         left: 9px;
         right: 9px;
         bottom: 9px;
-        grid-template-columns: auto auto 1fr auto;
+        grid-template-columns: auto auto 1fr auto auto;
         gap: 6px;
         padding: 7px 8px;
       }
 
       .vimeoVol{ display:none; }
-      .vimeoToggleBtn{ width: 26px; height: 26px; }
+      .vimeoToggleBtn,
+    .vimeoSoundBtn{ width: 26px; height: 26px; }
       .vimeoQuality{ max-width: 58px; font-size: 10px; padding: 0 5px; }
       .vimeoTime{ min-width: 30px; font-size: 9px; }
     }
@@ -6357,6 +6371,9 @@
       params.set("dnt", "1");
       params.set("playsinline", "1");
       params.set("controls", "0");
+      params.set("autoplay", "0");
+      params.set("background", "0");
+      params.set("muted", "0");
 
       if(!params.has("player_id")) params.set("player_id", "0");
       if(!params.has("app_id")) params.set("app_id", "58479");
@@ -6370,6 +6387,7 @@
         if(fixed) frame.setAttribute("src", fixed);
         frame.setAttribute("title", "Podgląd wideo");
         frame.setAttribute("loading", "lazy");
+        frame.setAttribute("allow", "autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share");
       });
 
       document.querySelectorAll("[data-video]").forEach(el => {
@@ -6386,6 +6404,26 @@
       const player = new Vimeo.Player(frame);
       vimeoPlayers.set(frame, player);
       return player;
+    }
+
+    function forceVimeoSound(player, holder){
+      if(!player) return Promise.resolve();
+
+      const volumeInput = holder ? holder.querySelector(".vimeoVol") : null;
+      let targetVolume = volumeInput ? Number(volumeInput.value) / 100 : 1;
+      if(!Number.isFinite(targetVolume) || targetVolume <= 0) targetVolume = 1;
+
+      const jobs = [];
+      if(typeof player.setMuted === "function") jobs.push(player.setMuted(false).catch(()=>{}));
+      if(typeof player.setVolume === "function") jobs.push(player.setVolume(targetVolume).catch(()=>{}));
+
+      return Promise.allSettled(jobs).then(() => {
+        const soundBtn = holder ? holder.querySelector(".vimeoSoundBtn") : null;
+        if(soundBtn){
+          soundBtn.textContent = targetVolume > 0 ? "🔊" : "🔇";
+          soundBtn.setAttribute("aria-label", targetVolume > 0 ? "Dźwięk włączony" : "Włącz dźwięk");
+        }
+      });
     }
 
     function makePlayLayer(label){
@@ -6410,6 +6448,7 @@
         <button class="vimeoToggleBtn" type="button" aria-label="Odtwórz albo zatrzymaj film">▶</button>
         <span class="vimeoTime">0:00</span>
         <input class="vimeoProgress" type="range" min="0" max="1000" value="0" aria-label="Postęp filmu">
+        <button class="vimeoSoundBtn" type="button" aria-label="Włącz dźwięk">🔊</button>
         <input class="vimeoVol" type="range" min="0" max="100" value="100" aria-label="Głośność">
         <select class="vimeoQuality" aria-label="Jakość filmu">
           <option value="auto">Auto</option>
@@ -6476,6 +6515,7 @@
       const toggleBtn = hud.querySelector(".vimeoToggleBtn");
       const timeEl = hud.querySelector(".vimeoTime");
       const progress = hud.querySelector(".vimeoProgress");
+      const soundBtn = hud.querySelector(".vimeoSoundBtn");
       const volume = hud.querySelector(".vimeoVol");
       const quality = hud.querySelector(".vimeoQuality");
       let duration = 0;
@@ -6498,11 +6538,25 @@
       }).catch(()=>{});
 
       player.getVolume().then(v => {
-        volume.value = Math.round((Number(v) || 0) * 100);
+        const currentVolume = Math.round((Number(v) || 0) * 100);
+        volume.value = currentVolume > 0 ? currentVolume : 100;
+        if(soundBtn) soundBtn.textContent = volume.value === "0" ? "🔇" : "🔊";
       }).catch(()=>{});
 
+      if(soundBtn){
+        soundBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          volume.value = volume.value === "0" ? "100" : volume.value;
+          forceVimeoSound(player, holder);
+        });
+      }
+
       volume.addEventListener("input", () => {
-        player.setVolume(Number(volume.value) / 100).catch(()=>{});
+        const v = Number(volume.value) / 100;
+        if(soundBtn) soundBtn.textContent = v > 0 ? "🔊" : "🔇";
+        if(typeof player.setMuted === "function") player.setMuted(v <= 0).catch(()=>{});
+        player.setVolume(v).catch(()=>{});
       });
 
       progress.addEventListener("input", () => {
@@ -6577,7 +6631,7 @@
       player.getPaused().then(paused => {
         if(paused){
           setVimeoUiState(holder, true, false);
-          player.play().then(() => {
+          forceVimeoSound(player, holder).then(() => player.play()).then(() => {
             setVimeoUiState(holder, true, false);
             startVimeoProgressLoop(player, holder);
           }).catch(() => {
@@ -6594,7 +6648,7 @@
         }
       }).catch(() => {
         setVimeoUiState(holder, true, false);
-        player.play().then(() => startVimeoProgressLoop(player, holder)).catch(()=>{});
+        forceVimeoSound(player, holder).then(() => player.play()).then(() => startVimeoProgressLoop(player, holder)).catch(()=>{});
       });
     }
 
@@ -6612,6 +6666,8 @@
         if(!player) return;
 
         player.setLoop(true).catch(()=>{});
+        if(typeof player.setMuted === "function") player.setMuted(false).catch(()=>{});
+        player.setVolume(1).catch(()=>{});
         wireVimeoControls(player, thumb);
 
         player.on("play", () => {
@@ -6727,6 +6783,8 @@
 
       modalVimeoPlayer = new Vimeo.Player(modalFrame);
       modalVimeoPlayer.setLoop(true).catch(()=>{});
+      if(typeof modalVimeoPlayer.setMuted === "function") modalVimeoPlayer.setMuted(false).catch(()=>{});
+      modalVimeoPlayer.setVolume(1).catch(()=>{});
       wireVimeoControls(modalVimeoPlayer, modalMedia);
 
       modalVimeoPlayer.on("loaded", () => {
