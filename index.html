@@ -4667,7 +4667,7 @@
       bottom: 12px;
       z-index: 8;
       display:grid;
-      grid-template-columns: auto auto 1fr auto auto auto;
+      grid-template-columns: auto auto 1fr auto auto;
       align-items:center;
       gap: 9px;
       padding: 8px 10px;
@@ -4781,7 +4781,7 @@
         left: 9px;
         right: 9px;
         bottom: 9px;
-        grid-template-columns: auto auto 1fr auto auto;
+        grid-template-columns: auto auto 1fr auto;
         gap: 6px;
         padding: 7px 8px;
       }
@@ -5186,6 +5186,110 @@
       #wiecej-realizacji .projectVertical{ max-width: 360px; margin-inline:auto; }
       #wiecej-realizacji .motionOnlyHero h2{ font-size: clamp(44px, 14vw, 74px) !important; }
       #wiecej-realizacji .motionHead h3{ font-size: clamp(42px, 13vw, 66px) !important; }
+    }
+
+  
+
+    /* FINAL FIX: czysty HUD bez ikonki dźwięku + normalny wygląd na Opera GX */
+    .vimeoSoundBtn{
+      display:none !important;
+    }
+
+    .vimeoProgress,
+    .vimeoVol{
+      -webkit-appearance:none;
+      appearance:none;
+      border:0 !important;
+      box-shadow:none !important;
+      background:transparent !important;
+      padding:0;
+    }
+
+    .vimeoProgress::-webkit-slider-runnable-track,
+    .vimeoVol::-webkit-slider-runnable-track{
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(255,255,255,.86), rgba(255,255,255,.28));
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .vimeoProgress::-webkit-slider-thumb,
+    .vimeoVol::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      appearance:none;
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      margin-top:-4px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(255,255,255,.30);
+      box-shadow:0 0 14px rgba(255,255,255,.22);
+    }
+
+    .vimeoProgress::-moz-range-track,
+    .vimeoVol::-moz-range-track{
+      height:4px;
+      border-radius:999px;
+      background:linear-gradient(90deg, rgba(255,255,255,.86), rgba(255,255,255,.28));
+      border:1px solid rgba(255,255,255,.10);
+    }
+
+    .vimeoProgress::-moz-range-thumb,
+    .vimeoVol::-moz-range-thumb{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:rgba(255,255,255,.94);
+      border:1px solid rgba(255,255,255,.30);
+      box-shadow:0 0 14px rgba(255,255,255,.22);
+    }
+
+    @media (max-width: 760px){
+      .vimeoHud{
+        grid-template-columns:auto auto 1fr auto !important;
+      }
+
+      .vimeoVol,
+      .vimeoSoundBtn{
+        display:none !important;
+      }
+
+      .vimeoQuality{
+        max-width:60px !important;
+      }
+    }
+
+    @media (max-width: 760px){
+      #wiecej-realizacji .moreMotionCard::before,
+      #wiecej-realizacji .moreMotionCard::after,
+      .morePageHero::before,
+      .motionOnlyHero::after,
+      .gridBg::before{
+        animation:none !important;
+      }
+
+      #wiecej-realizacji .moreMotionCard,
+      .morePageHero,
+      .motionOnlyCat,
+      .vimeoHud,
+      .topbar,
+      .morePageTopbar{
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
+      }
+
+      #wiecej-realizacji .moreMotionCard:hover{
+        transform:none !important;
+      }
+    }
+
+
+    #wiecej-realizacji .openBtn,
+    #wiecej-realizacji .watchBtn,
+    #wiecej-realizacji .projectOpen,
+    #wiecej-realizacji [class*="open"],
+    #wiecej-realizacji [class*="watch"]{
+      display:none !important;
     }
 
   </style>
@@ -6354,6 +6458,17 @@
     const vimeoPlayers = new Map();
     let modalVimeoPlayer = null;
 
+    window.addEventListener("error", (e) => {
+      const msg = String(e.message || "");
+      if(msg.includes("Vimeo") || msg.includes("Player") || msg.includes("ResizeObserver")){
+        e.preventDefault();
+      }
+    });
+
+    function isSmallMobile(){
+      return window.matchMedia && window.matchMedia("(max-width: 760px)").matches;
+    }
+
     function normalizeVimeoUrl(src){
       if(!src || !String(src).includes("player.vimeo.com/video/")) return src;
 
@@ -6387,6 +6502,7 @@
         if(fixed) frame.setAttribute("src", fixed);
         frame.setAttribute("title", "Podgląd wideo");
         frame.setAttribute("loading", "lazy");
+        frame.setAttribute("fetchpriority", "low");
         frame.setAttribute("allow", "autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share");
       });
 
@@ -6418,11 +6534,7 @@
       if(typeof player.setVolume === "function") jobs.push(player.setVolume(targetVolume).catch(()=>{}));
 
       return Promise.allSettled(jobs).then(() => {
-        const soundBtn = holder ? holder.querySelector(".vimeoSoundBtn") : null;
-        if(soundBtn){
-          soundBtn.textContent = targetVolume > 0 ? "🔊" : "🔇";
-          soundBtn.setAttribute("aria-label", targetVolume > 0 ? "Dźwięk włączony" : "Włącz dźwięk");
-        }
+  
       });
     }
 
@@ -6448,7 +6560,6 @@
         <button class="vimeoToggleBtn" type="button" aria-label="Odtwórz albo zatrzymaj film">▶</button>
         <span class="vimeoTime">0:00</span>
         <input class="vimeoProgress" type="range" min="0" max="1000" value="0" aria-label="Postęp filmu">
-        <button class="vimeoSoundBtn" type="button" aria-label="Włącz dźwięk">🔊</button>
         <input class="vimeoVol" type="range" min="0" max="100" value="100" aria-label="Głośność">
         <select class="vimeoQuality" aria-label="Jakość filmu">
           <option value="auto">Auto</option>
@@ -6515,7 +6626,6 @@
       const toggleBtn = hud.querySelector(".vimeoToggleBtn");
       const timeEl = hud.querySelector(".vimeoTime");
       const progress = hud.querySelector(".vimeoProgress");
-      const soundBtn = hud.querySelector(".vimeoSoundBtn");
       const volume = hud.querySelector(".vimeoVol");
       const quality = hud.querySelector(".vimeoQuality");
       let duration = 0;
@@ -6540,21 +6650,10 @@
       player.getVolume().then(v => {
         const currentVolume = Math.round((Number(v) || 0) * 100);
         volume.value = currentVolume > 0 ? currentVolume : 100;
-        if(soundBtn) soundBtn.textContent = volume.value === "0" ? "🔇" : "🔊";
       }).catch(()=>{});
-
-      if(soundBtn){
-        soundBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          volume.value = volume.value === "0" ? "100" : volume.value;
-          forceVimeoSound(player, holder);
-        });
-      }
 
       volume.addEventListener("input", () => {
         const v = Number(volume.value) / 100;
-        if(soundBtn) soundBtn.textContent = v > 0 ? "🔊" : "🔇";
         if(typeof player.setMuted === "function") player.setMuted(v <= 0).catch(()=>{});
         player.setVolume(v).catch(()=>{});
       });
@@ -6631,7 +6730,7 @@
       player.getPaused().then(paused => {
         if(paused){
           setVimeoUiState(holder, true, false);
-          forceVimeoSound(player, holder).then(() => player.play()).then(() => {
+          player.play().then(() => forceVimeoSound(player, holder)).then(() => {
             setVimeoUiState(holder, true, false);
             startVimeoProgressLoop(player, holder);
           }).catch(() => {
@@ -6648,7 +6747,7 @@
         }
       }).catch(() => {
         setVimeoUiState(holder, true, false);
-        forceVimeoSound(player, holder).then(() => player.play()).then(() => startVimeoProgressLoop(player, holder)).catch(()=>{});
+        player.play().then(() => forceVimeoSound(player, holder)).then(() => startVimeoProgressLoop(player, holder)).catch(()=>{});
       });
     }
 
