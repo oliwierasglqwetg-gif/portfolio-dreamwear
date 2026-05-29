@@ -5292,6 +5292,131 @@
       display:none !important;
     }
 
+
+    /* OWLLX FINAL: brak napisu OBEJRZYJ, różowy przycisk głośności, stabilniejszy mobile */
+    .thumb::after,
+    #portfolio .thumb::after,
+    #wiecej-realizacji .thumb::after,
+    .moreMotionCard .thumb::after{
+      content:none !important;
+      display:none !important;
+    }
+
+    .vimeoHud{
+      grid-template-columns: auto auto 1fr auto auto auto !important;
+    }
+
+    .vimeoSoundBtn{
+      display:grid !important;
+      width:32px !important;
+      height:28px !important;
+      padding:0 7px !important;
+      border-radius:999px !important;
+      border:1px solid rgba(255,120,168,.45) !important;
+      color:rgba(255,244,249,.96) !important;
+      background:
+        radial-gradient(120px 60px at 30% 15%, rgba(255,120,168,.42), transparent 62%),
+        linear-gradient(135deg, rgba(255,85,145,.34), rgba(255,255,255,.08)) !important;
+      box-shadow:
+        0 0 18px rgba(255,85,145,.38),
+        0 0 34px rgba(255,85,145,.18),
+        inset 0 1px 0 rgba(255,255,255,.20) !important;
+      place-items:center !important;
+      cursor:pointer;
+      overflow:hidden;
+    }
+
+    .vimeoSoundBtn::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background:linear-gradient(110deg, transparent 35%, rgba(255,255,255,.38) 48%, transparent 62%);
+      transform:translateX(-90%) rotate(12deg);
+      animation: owllxVolSweep 2.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+
+    .vimeoSoundBtn span{
+      position:relative;
+      z-index:1;
+      font-family:var(--mono);
+      font-size:8px;
+      font-weight:950;
+      letter-spacing:.55px;
+      line-height:1;
+    }
+
+    .vimeoSoundBtn:hover{
+      transform:scale(1.06) !important;
+      border-color:rgba(255,150,190,.70) !important;
+      box-shadow:
+        0 0 24px rgba(255,85,145,.50),
+        0 0 46px rgba(255,85,145,.24),
+        inset 0 1px 0 rgba(255,255,255,.26) !important;
+    }
+
+    .vimeoSoundBtn.isMuted{
+      opacity:.72;
+      filter:saturate(.65);
+    }
+
+    @keyframes owllxVolSweep{
+      0%, 42%{ transform:translateX(-95%) rotate(12deg); opacity:0; }
+      55%{ opacity:.85; }
+      78%, 100%{ transform:translateX(95%) rotate(12deg); opacity:0; }
+    }
+
+    @media (max-width:760px){
+      html,
+      body{
+        position:relative !important;
+        height:auto !important;
+        min-height:100% !important;
+        overflow-x:hidden !important;
+        overflow-y:auto !important;
+        overscroll-behavior-y:auto !important;
+      }
+
+      .scroll{
+        position:relative !important;
+        inset:auto !important;
+        height:auto !important;
+        min-height:100vh !important;
+        overflow:visible !important;
+        -webkit-overflow-scrolling:auto !important;
+        overscroll-behavior-y:auto !important;
+      }
+
+      .safeBottomCover{ display:none !important; }
+
+      .vimeoHud{
+        grid-template-columns:auto auto 1fr auto !important;
+        bottom:9px !important;
+        left:9px !important;
+        right:9px !important;
+        gap:7px !important;
+        padding:7px 8px !important;
+      }
+
+      .vimeoSoundBtn,
+      .vimeoVol{
+        display:none !important;
+      }
+
+      #wiecej-realizacji iframe.vimeoThumb,
+      #portfolio iframe.vimeoThumb{
+        transform:translateZ(0);
+        backface-visibility:hidden;
+      }
+
+      #wiecej-realizacji .moreMotionCard,
+      #wiecej-realizacji .motionOnlyCat,
+      .morePageHero,
+      .motionOnlyHero{
+        contain:layout paint;
+      }
+    }
+
   </style>
 </head>
 
@@ -6560,6 +6685,7 @@
         <button class="vimeoToggleBtn" type="button" aria-label="Odtwórz albo zatrzymaj film">▶</button>
         <span class="vimeoTime">0:00</span>
         <input class="vimeoProgress" type="range" min="0" max="1000" value="0" aria-label="Postęp filmu">
+        <button class="vimeoSoundBtn" type="button" aria-label="Wycisz albo włącz dźwięk"><span>VOL</span></button>
         <input class="vimeoVol" type="range" min="0" max="100" value="100" aria-label="Głośność">
         <select class="vimeoQuality" aria-label="Jakość filmu">
           <option value="auto">Auto</option>
@@ -6627,6 +6753,7 @@
       const timeEl = hud.querySelector(".vimeoTime");
       const progress = hud.querySelector(".vimeoProgress");
       const volume = hud.querySelector(".vimeoVol");
+      const soundBtn = hud.querySelector(".vimeoSoundBtn");
       const quality = hud.querySelector(".vimeoQuality");
       let duration = 0;
       let seeking = false;
@@ -6656,7 +6783,24 @@
         const v = Number(volume.value) / 100;
         if(typeof player.setMuted === "function") player.setMuted(v <= 0).catch(()=>{});
         player.setVolume(v).catch(()=>{});
+        if(soundBtn) soundBtn.classList.toggle("isMuted", v <= 0);
       });
+
+      if(soundBtn){
+        soundBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const mutedNow = soundBtn.classList.toggle("isMuted");
+          if(typeof player.setMuted === "function") player.setMuted(mutedNow).catch(()=>{});
+          if(mutedNow){
+            player.setVolume(0).catch(()=>{});
+            volume.value = 0;
+          } else {
+            volume.value = 100;
+            player.setVolume(1).catch(()=>{});
+          }
+        });
+      }
 
       progress.addEventListener("input", () => {
         seeking = true;
@@ -6761,6 +6905,50 @@
         const layer = makePlayLayer("Odtwórz albo zatrzymaj wideo");
         thumb.appendChild(layer);
 
+        const bindPlayerEvents = (player) => {
+          if(!player || thumb._owllxEventsBound) return;
+          thumb._owllxEventsBound = true;
+
+          player.on("play", () => {
+            setVimeoUiState(thumb, true, false);
+            startVimeoProgressLoop(player, thumb);
+          });
+
+          player.on("pause", () => {
+            setVimeoUiState(thumb, false, true);
+            stopVimeoProgressLoop(thumb);
+            player.getCurrentTime().then(seconds => player.getDuration().then(d => updateVimeoHud(thumb, seconds, d))).catch(()=>{});
+          });
+
+          player.on("ended", () => {
+            setVimeoUiState(thumb, false, false);
+            stopVimeoProgressLoop(thumb);
+            player.setCurrentTime(0).catch(()=>{});
+            updateVimeoHud(thumb, 0, 0);
+          });
+        };
+
+        if(isSmallMobile()){
+          let mobilePlayer = null;
+          layer.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if(!mobilePlayer){
+              mobilePlayer = getVimeoPlayer(frame);
+              if(!mobilePlayer) return;
+              mobilePlayer.setLoop(true).catch(()=>{});
+              if(typeof mobilePlayer.setMuted === "function") mobilePlayer.setMuted(false).catch(()=>{});
+              mobilePlayer.setVolume(1).catch(()=>{});
+              wireVimeoControls(mobilePlayer, thumb);
+              bindPlayerEvents(mobilePlayer);
+            }
+
+            toggleVimeoPlayer(mobilePlayer, thumb);
+          });
+          return;
+        }
+
         const player = getVimeoPlayer(frame);
         if(!player) return;
 
@@ -6768,24 +6956,7 @@
         if(typeof player.setMuted === "function") player.setMuted(false).catch(()=>{});
         player.setVolume(1).catch(()=>{});
         wireVimeoControls(player, thumb);
-
-        player.on("play", () => {
-          setVimeoUiState(thumb, true, false);
-          startVimeoProgressLoop(player, thumb);
-        });
-
-        player.on("pause", () => {
-          setVimeoUiState(thumb, false, true);
-          stopVimeoProgressLoop(thumb);
-          player.getCurrentTime().then(seconds => player.getDuration().then(d => updateVimeoHud(thumb, seconds, d))).catch(()=>{});
-        });
-
-        player.on("ended", () => {
-          setVimeoUiState(thumb, false, false);
-          stopVimeoProgressLoop(thumb);
-          player.setCurrentTime(0).catch(()=>{});
-          updateVimeoHud(thumb, 0, 0);
-        });
+        bindPlayerEvents(player);
 
         layer.addEventListener("click", (e) => {
           e.preventDefault();
