@@ -5417,6 +5417,245 @@
       }
     }
 
+
+    /* === OWLLX PATCH: czysty player, bez sweepów, stabilniejszy mobile === */
+    .motionOnlyHero::before,
+    #wiecej-realizacji .moreMotionCard::after,
+    .vimeoSoundBtn::before{
+      content:none !important;
+      display:none !important;
+      animation:none !important;
+    }
+
+    .motionOnlyHero,
+    #wiecej-realizacji .moreMotionCard,
+    .vimeoSoundBtn,
+    .vimeoHud,
+    .topbar,
+    .morePageTopbar{
+      animation:none !important;
+    }
+
+    .thumb::after,
+    #portfolio .thumb::after,
+    #wiecej-realizacji .thumb::after,
+    .moreMotionCard .thumb::after{
+      content:none !important;
+      display:none !important;
+    }
+
+    .vimeoHud{
+      grid-template-columns:auto auto minmax(90px, 1fr) auto auto !important;
+      gap:10px !important;
+      padding:9px 11px !important;
+      overflow:visible !important;
+    }
+
+    .vimeoProgress{
+      min-width:0 !important;
+      width:100% !important;
+      accent-color:rgba(255,118,168,.95) !important;
+    }
+
+    .vimeoProgress::-webkit-slider-runnable-track{
+      height:5px !important;
+      border-radius:999px !important;
+      background:linear-gradient(90deg, rgba(255,90,150,.90), rgba(255,210,230,.90)) !important;
+      box-shadow:0 0 14px rgba(255,85,145,.30) !important;
+    }
+
+    .vimeoProgress::-webkit-slider-thumb{
+      margin-top:-6px !important;
+      width:17px !important;
+      height:17px !important;
+      border-radius:999px !important;
+      border:2px solid rgba(255,255,255,.92) !important;
+      background:rgba(255,85,145,.98) !important;
+      box-shadow:0 0 18px rgba(255,85,145,.55) !important;
+    }
+
+    .vimeoProgress::-moz-range-track{
+      height:5px !important;
+      border-radius:999px !important;
+      background:linear-gradient(90deg, rgba(255,90,150,.90), rgba(255,210,230,.90)) !important;
+      box-shadow:0 0 14px rgba(255,85,145,.30) !important;
+    }
+
+    .vimeoProgress::-moz-range-thumb{
+      width:17px !important;
+      height:17px !important;
+      border-radius:999px !important;
+      border:2px solid rgba(255,255,255,.92) !important;
+      background:rgba(255,85,145,.98) !important;
+      box-shadow:0 0 18px rgba(255,85,145,.55) !important;
+    }
+
+    .vimeoSoundBtn{
+      position:relative !important;
+      display:grid !important;
+      place-items:center !important;
+      width:31px !important;
+      height:31px !important;
+      min-width:31px !important;
+      padding:0 !important;
+      border-radius:999px !important;
+      border:1px solid rgba(255,118,168,.58) !important;
+      background:radial-gradient(circle at 35% 25%, rgba(255,198,220,.33), rgba(255,85,145,.24) 48%, rgba(15,10,18,.70) 100%) !important;
+      box-shadow:0 0 16px rgba(255,85,145,.36), inset 0 1px 0 rgba(255,255,255,.22) !important;
+      overflow:visible !important;
+    }
+
+    .vimeoSoundBtn span{
+      display:block !important;
+      width:14px !important;
+      height:14px !important;
+      position:relative !important;
+      font-size:0 !important;
+      letter-spacing:0 !important;
+    }
+
+    .vimeoSoundBtn span::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:4px;
+      width:5px;
+      height:6px;
+      border-radius:2px 0 0 2px;
+      background:rgba(255,244,249,.96);
+      box-shadow:5px -3px 0 -1px rgba(255,244,249,.96), 5px 3px 0 -1px rgba(255,244,249,.96);
+    }
+
+    .vimeoSoundBtn span::after{
+      content:"";
+      position:absolute;
+      right:0;
+      top:2px;
+      width:7px;
+      height:10px;
+      border:2px solid rgba(255,244,249,.96);
+      border-left:0;
+      border-radius:0 999px 999px 0;
+      opacity:.92;
+    }
+
+    .vimeoVol{
+      position:absolute !important;
+      right:48px !important;
+      bottom:48px !important;
+      width:118px !important;
+      height:28px !important;
+      padding:0 9px !important;
+      opacity:0 !important;
+      pointer-events:none !important;
+      transform:rotate(-90deg) translateX(10px) !important;
+      transform-origin:right center !important;
+      transition:opacity .16s ease, transform .16s ease !important;
+      accent-color:rgba(255,118,168,.96) !important;
+      border-color:rgba(255,118,168,.35) !important;
+      background:rgba(12,10,16,.88) !important;
+      box-shadow:0 0 22px rgba(255,85,145,.22), inset 0 1px 0 rgba(255,255,255,.12) !important;
+    }
+
+    .vimeoHud.volumeOpen .vimeoVol,
+    .vimeoSoundBtn:hover + .vimeoVol,
+    .vimeoVol:hover{
+      opacity:1 !important;
+      pointer-events:auto !important;
+      transform:rotate(-90deg) translateX(0) !important;
+    }
+
+    #wiecej-realizacji .projectWide{
+      grid-column:1 / -1 !important;
+      max-width:960px !important;
+      width:100% !important;
+      justify-self:center !important;
+      order:1 !important;
+    }
+
+    #wiecej-realizacji .projectWide .thumb{
+      aspect-ratio:16 / 9 !important;
+      min-height:0 !important;
+    }
+
+    #wiecej-realizacji .projectVertical{
+      order:2 !important;
+      max-width:320px !important;
+      width:100% !important;
+      justify-self:center !important;
+    }
+
+    #wiecej-realizacji .projectVertical .thumb{
+      aspect-ratio:9 / 16 !important;
+    }
+
+    @media (max-width:760px){
+      html, body{
+        position:relative !important;
+        height:auto !important;
+        min-height:100% !important;
+        overflow-x:hidden !important;
+        overflow-y:auto !important;
+        overscroll-behavior-y:contain !important;
+        -webkit-overflow-scrolling:touch !important;
+      }
+
+      body{ touch-action:pan-y !important; }
+
+      .scroll{
+        position:relative !important;
+        inset:auto !important;
+        height:auto !important;
+        min-height:100vh !important;
+        overflow:visible !important;
+        overscroll-behavior-y:contain !important;
+        -webkit-overflow-scrolling:touch !important;
+      }
+
+      .bgFixed{ position:absolute !important; min-height:100vh !important; }
+      .gridBg{ display:none !important; }
+      .safeBottomCover{ display:none !important; }
+
+      .vimeoHud{
+        grid-template-columns:auto auto minmax(0, 1fr) !important;
+        left:8px !important;
+        right:8px !important;
+        bottom:8px !important;
+        gap:7px !important;
+        padding:7px 8px !important;
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
+      }
+
+      .vimeoSoundBtn,
+      .vimeoVol,
+      .vimeoQuality{
+        display:none !important;
+      }
+
+      .vimeoProgress{ min-width:120px !important; }
+
+      #wiecej-realizacji .moreMotionCard,
+      .motionOnlyHero,
+      .motionOnlyCat,
+      .morePageHero,
+      .sectionBox{
+        backdrop-filter:none !important;
+        -webkit-backdrop-filter:none !important;
+        animation:none !important;
+      }
+
+      #wiecej-realizacji .projectWide,
+      #wiecej-realizacji .projectVertical{
+        grid-column:1 / -1 !important;
+        order:initial !important;
+      }
+
+      #wiecej-realizacji .projectVertical{
+        max-width:300px !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -6685,7 +6924,7 @@
         <button class="vimeoToggleBtn" type="button" aria-label="Odtwórz albo zatrzymaj film">▶</button>
         <span class="vimeoTime">0:00</span>
         <input class="vimeoProgress" type="range" min="0" max="1000" value="0" aria-label="Postęp filmu">
-        <button class="vimeoSoundBtn" type="button" aria-label="Wycisz albo włącz dźwięk"><span>VOL</span></button>
+        <button class="vimeoSoundBtn" type="button" aria-label="Głośność" title="Głośność"><span aria-hidden="true"></span></button>
         <input class="vimeoVol" type="range" min="0" max="100" value="100" aria-label="Głośność">
         <select class="vimeoQuality" aria-label="Jakość filmu">
           <option value="auto">Auto</option>
@@ -6899,7 +7138,7 @@
       if(!window.Vimeo || !window.Vimeo.Player) return;
 
       document.querySelectorAll("#portfolio .thumb, #wiecej-realizacji .thumb").forEach(thumb => {
-        const frame = thumb.querySelector('iframe[src*="player.vimeo.com/video/"]');
+        const frame = thumb.querySelector('iframe.vimeoThumb, iframe[src*="player.vimeo.com/video/"]');
         if(!frame || thumb.querySelector(".vimeoPlayLayer")) return;
 
         const layer = makePlayLayer("Odtwórz albo zatrzymaj wideo");
@@ -6930,9 +7169,11 @@
 
         if(isSmallMobile()){
           let mobilePlayer = null;
-          layer.addEventListener("click", (e) => {
+          layer.addEventListener("click", async (e) => {
             e.preventDefault();
             e.stopPropagation();
+
+            await restoreMobileFrame(frame);
 
             if(!mobilePlayer){
               mobilePlayer = getVimeoPlayer(frame);
@@ -6966,8 +7207,38 @@
       });
     }
 
+    function prepareMobileVimeoLazy(){
+      if(!isSmallMobile()) return;
+      document.querySelectorAll("#portfolio iframe.vimeoThumb, #wiecej-realizacji iframe.vimeoThumb").forEach(frame => {
+        const src = frame.getAttribute("src");
+        if(src && src.includes("player.vimeo.com/video/")){
+          frame.dataset.src = src;
+          frame.removeAttribute("src");
+          frame.setAttribute("loading", "lazy");
+        }
+      });
+    }
+
+    function restoreMobileFrame(frame){
+      return new Promise(resolve => {
+        if(!frame || frame.getAttribute("src")){ resolve(); return; }
+        const src = frame.dataset.src;
+        if(!src){ resolve(); return; }
+        let done = false;
+        const finish = () => {
+          if(done) return;
+          done = true;
+          resolve();
+        };
+        frame.addEventListener("load", finish, { once:true });
+        frame.setAttribute("src", src);
+        window.setTimeout(finish, 650);
+      });
+    }
+
     function initCustomVimeoPlayers(){
       setVimeoUrls();
+      prepareMobileVimeoLazy();
       attachInlineVimeoPlayers();
     }
 
